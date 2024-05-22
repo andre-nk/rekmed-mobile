@@ -19,7 +19,7 @@ abstract class Clinic with _$Clinic {
 
   factory Clinic.fromJson(Map<String, dynamic> json) => _$ClinicFromJson(json);
 
-  factory Clinic.fromFirstore(DocumentSnapshot snapshot, SnapshotOptions? options) =>
+  factory Clinic.fromFirestore(DocumentSnapshot snapshot, SnapshotOptions? options) =>
       Clinic.fromJson(snapshot.data() as Map<String, dynamic>);
 
   static Map<String, Object?> toFirestore(Clinic clinic, SetOptions? options) =>
