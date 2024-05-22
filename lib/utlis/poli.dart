@@ -16,5 +16,6 @@ enum Poli{
   ginjal,
   lambung,
   hati,
+  penyakitDalam,
   endokrin,
 }
