@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:rekmed/view/screens/auth/signin/SignInPage.dart';
 import 'package:rekmed/utlis/theme.dart';
 import 'firebase_options.dart';
 
@@ -19,11 +20,7 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: AppTheme.theme,
-      home: const Scaffold(
-        body: Center(
-          child: Text('Hello World!'),
-        ),
-      ),
-    );
+      home: const SignInView()
+      );
   }
 }
