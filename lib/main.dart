@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:rekmed/utlis/theme.dart';
-import 'package:rekmed/view/widgets/doctor/DoctorProfilePicture.dart';
+import 'package:rekmed/view/screens/doctor/DoctorProfilePage.dart';
 import 'firebase_options.dart';
 
 Future<void> main() async {
@@ -20,7 +20,7 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: AppTheme.theme,
-      home: const Scaffold(body: DoctorProfilePicture()),
+      home: const Scaffold(body: DoctorProfilePage()),
     );
   }
 }

@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 class AppBarCustom extends StatelessWidget implements PreferredSizeWidget {
   final String title;
 
-  const AppBarCustom({Key? key, required this.title}) : super(key: key);
+  const AppBarCustom({super.key, required this.title});
 
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      leading: IconButton(onPressed: () {}, icon: Icon(Icons.arrow_back)),
+      leading: IconButton(onPressed: () {}, icon: const Icon(Icons.arrow_back)),
       title: Text(title),
     );
   }
