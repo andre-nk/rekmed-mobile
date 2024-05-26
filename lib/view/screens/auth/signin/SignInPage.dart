@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:rekmed/view/widgets/auth.form.dart';
-import 'package:rekmed/view/widgets/button.dart';
+import 'package:rekmed/view/widgets/auth/AuthForm.dart';
+import 'package:rekmed/view/widgets/auth/Button.dart';
 
 class SignInView extends StatefulWidget {
   const SignInView({super.key});
