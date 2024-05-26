@@ -5,10 +5,10 @@ class BottomNavBar extends StatelessWidget {
   final Function(int) onItemTapped;
 
   const BottomNavBar({
-    Key? key,
+    super.key,
     required this.selectedIndex,
     required this.onItemTapped,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -27,8 +27,8 @@ class BottomNavBar extends StatelessWidget {
         BottomNavigationBarItem(icon: Icon(Icons.settings), label: 'Akun'),
       ],
       currentIndex: selectedIndex,
-      selectedItemColor: Color(0xFF05CAD5),
-      unselectedItemColor: Color(0xFF868484),
+      selectedItemColor: const Color(0xFF05CAD5),
+      unselectedItemColor: const Color(0xFF868484),
       onTap: onItemTapped,
     );
   }

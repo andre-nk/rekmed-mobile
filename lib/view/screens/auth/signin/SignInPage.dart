@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:rekmed/app/auth/cubit/auth_cubit.dart';
 import 'package:rekmed/view/widgets/auth/AuthForm.dart';
 import 'package:rekmed/view/widgets/auth/Button.dart';
 
-class SignInView extends StatefulWidget {
-  const SignInView({super.key});
+class SignInPage extends StatefulWidget {
+  const SignInPage({super.key});
 
   @override
-  State<SignInView> createState() => _SignInViewState();
+  State<SignInPage> createState() => _SignInPageState();
 }
 
-class _SignInViewState extends State<SignInView> {
-  final TextEditingController usernameController = TextEditingController();
+class _SignInPageState extends State<SignInPage> {
+  final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   bool isCheckedRememberMe = false;
 
@@ -43,9 +45,9 @@ class _SignInViewState extends State<SignInView> {
 
                 ///input username
                 AuthForm(
-                  controller: usernameController,
+                  controller: emailController,
                   textInputType: TextInputType.emailAddress,
-                  text: 'Username',
+                  text: 'E-mail',
                   obsecure: false,
                 ),
 
@@ -67,8 +69,7 @@ class _SignInViewState extends State<SignInView> {
                       height: 15,
                       width: 15,
                       child: Theme(
-                        data: ThemeData(
-                            unselectedWidgetColor: const Color(0xff00C8E8)),
+                        data: ThemeData(unselectedWidgetColor: const Color(0xff00C8E8)),
                         child: Checkbox(
                             activeColor: const Color(0xff00C8E8),
                             value: isCheckedRememberMe,
@@ -84,8 +85,24 @@ class _SignInViewState extends State<SignInView> {
                 ]),
 
                 const SizedBox(height: 51),
-                const Button(),
-
+                Button(
+                  onPressed: () {
+                    if (emailController.text.isNotEmpty &&
+                        passwordController.text.isNotEmpty) {
+                      context.read<AuthCubit>().signInWithEmailAndPassword(
+                            email: emailController.text,
+                            password: passwordController.text,
+                          );
+                    } else {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Text('Email dan Password tidak boleh kosong'),
+                        ),
+                      );
+                    }
+                  },
+                  text: 'Sign In',
+                ),
                 const SizedBox(height: 10),
                 Container(
                   height: 20,
@@ -94,15 +111,15 @@ class _SignInViewState extends State<SignInView> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text('Belum memiliki Akun? ',
-                          style: TextStyle(
-                              color: Color(0xff646464), fontSize: 13)),
+                          style: TextStyle(color: Color(0xff646464), fontSize: 13)),
                       InkWell(
                         child: Text(
                           'Sign Up',
                           style: TextStyle(
-                              color: Color(0xff646464),
-                              fontSize: 13,
-                              fontWeight: FontWeight.bold),
+                            color: Color(0xff646464),
+                            fontSize: 13,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       )
                     ],

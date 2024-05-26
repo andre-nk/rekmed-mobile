@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:rekmed/view/screens/doctor/DoctorProfilePage.dart';
 import 'package:rekmed/view/widgets/navigation/BottomNavBar.dart';
 
 class HomeWrapper extends StatefulWidget {
@@ -19,8 +20,11 @@ class _HomeWrapperState extends State<HomeWrapper> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      body: const DoctorProfilePage(),
       bottomNavigationBar: BottomNavBar(
-          selectedIndex: _selectedIndex, onItemTapped: _onItemTapped),
+        selectedIndex: _selectedIndex,
+        onItemTapped: _onItemTapped,
+      ),
     );
   }
 }
