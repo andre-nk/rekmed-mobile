@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:rekmed/utlis/poli.dart';
 
@@ -17,10 +16,4 @@ abstract class Rekmed with _$Rekmed {
       required Poli poli}) = _Rekmed;
 
   factory Rekmed.fromJson(Map<String, dynamic> json) => _$RekmedFromJson(json);
-
-  factory Rekmed.fromFirstore(DocumentSnapshot snapshot, SnapshotOptions? options) =>
-      Rekmed.fromJson(snapshot.data() as Map<String, dynamic>);
-
-  static Map<String, Object?> toFirestore(Rekmed rekmed, SetOptions? options) =>
-      rekmed.toJson();
 }

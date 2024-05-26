@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:rekmed/utlis/poli.dart';
 
@@ -17,10 +16,4 @@ abstract class Patient with _$Patient {
       required List<String> rekmed}) = _Patient;
 
   factory Patient.fromJson(Map<String, dynamic> json) => _$PatientFromJson(json);
-
-  factory Patient.fromFirstore(DocumentSnapshot snapshot, SnapshotOptions? options) =>
-      Patient.fromJson(snapshot.data() as Map<String, dynamic>);
-
-  static Map<String, Object?> toFirestore(Patient patient, SetOptions? options) =>
-      patient.toJson();
 }
