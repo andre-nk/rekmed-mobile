@@ -45,5 +45,6 @@ const _$PoliEnumMap = {
   Poli.ginjal: 'ginjal',
   Poli.lambung: 'lambung',
   Poli.hati: 'hati',
+  Poli.penyakitDalam: 'penyakitDalam',
   Poli.endokrin: 'endokrin',
 };

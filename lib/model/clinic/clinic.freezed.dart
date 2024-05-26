@@ -186,7 +186,7 @@ class __$$ClinicImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$ClinicImpl implements _Clinic {
+class _$ClinicImpl extends _Clinic {
   const _$ClinicImpl(
       {required this.uid,
       required this.name,
@@ -195,7 +195,8 @@ class _$ClinicImpl implements _Clinic {
       required this.phone,
       required this.address,
       required this.bpjs,
-      required this.satuSehat});
+      required this.satuSehat})
+      : super._();
 
   factory _$ClinicImpl.fromJson(Map<String, dynamic> json) =>
       _$$ClinicImplFromJson(json);
@@ -258,7 +259,7 @@ class _$ClinicImpl implements _Clinic {
   }
 }
 
-abstract class _Clinic implements Clinic {
+abstract class _Clinic extends Clinic {
   const factory _Clinic(
       {required final String uid,
       required final String name,
@@ -268,6 +269,7 @@ abstract class _Clinic implements Clinic {
       required final String address,
       required final String bpjs,
       required final String satuSehat}) = _$ClinicImpl;
+  const _Clinic._() : super._();
 
   factory _Clinic.fromJson(Map<String, dynamic> json) = _$ClinicImpl.fromJson;
 
