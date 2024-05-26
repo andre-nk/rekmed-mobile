@@ -14,13 +14,6 @@ class SignInPage extends StatefulWidget {
 class _SignInPageState extends State<SignInPage> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
-  bool isCheckedRememberMe = false;
-
-  void rememberMe(bool value) {
-    setState(() {
-      isCheckedRememberMe = value;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -43,48 +36,40 @@ class _SignInPageState extends State<SignInPage> {
                 ),
                 const SizedBox(height: 67),
 
-                ///input username
+                /// input username
                 AuthForm(
                   controller: emailController,
                   textInputType: TextInputType.emailAddress,
-                  text: 'E-mail',
-                  obsecure: false,
+                  text: 'Email',
+                  obscure: false,
                 ),
 
                 const SizedBox(height: 10),
 
-                ///input password
+                /// input password
                 AuthForm(
                   controller: passwordController,
                   textInputType: TextInputType.text,
                   text: 'Password',
-                  obsecure: true,
+                  obscure: true,
                 ),
 
-                const SizedBox(height: 13),
+                const SizedBox(height: 14),
 
-                ///remember me
-                Row(mainAxisAlignment: MainAxisAlignment.start, children: [
-                  SizedBox(
-                      height: 15,
-                      width: 15,
-                      child: Theme(
-                        data: ThemeData(unselectedWidgetColor: const Color(0xff00C8E8)),
-                        child: Checkbox(
-                            activeColor: const Color(0xff00C8E8),
-                            value: isCheckedRememberMe,
-                            onChanged: (val) {
-                              rememberMe(val ?? false);
-                            }),
-                      )),
-                  const SizedBox(
-                    width: 10.0,
+                /// lupa password
+                const Align(
+                  alignment: Alignment.centerRight,
+                  child: Text(
+                    "Lupa Password?",
+                    style: TextStyle(
+                      fontSize: 11,
+                      color: Color(0xFF87CBB9),
+                    ),
                   ),
-                  const Text("Ingat Saya",
-                      style: TextStyle(color: Color(0xff646464), fontSize: 11))
-                ]),
+                ),
 
-                const SizedBox(height: 51),
+                const SizedBox(height: 54),
+
                 Button(
                   onPressed: () {
                     if (emailController.text.isNotEmpty &&
@@ -96,7 +81,8 @@ class _SignInPageState extends State<SignInPage> {
                     } else {
                       ScaffoldMessenger.of(context).showSnackBar(
                         const SnackBar(
-                          content: Text('Email dan Password tidak boleh kosong'),
+                          content:
+                              Text('Email dan Password tidak boleh kosong'),
                         ),
                       );
                     }
@@ -111,7 +97,8 @@ class _SignInPageState extends State<SignInPage> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text('Belum memiliki Akun? ',
-                          style: TextStyle(color: Color(0xff646464), fontSize: 13)),
+                          style: TextStyle(
+                              color: Color(0xff646464), fontSize: 13)),
                       InkWell(
                         child: Text(
                           'Sign Up',
