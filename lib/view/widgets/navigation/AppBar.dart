@@ -17,10 +17,12 @@ class AppBarCustom extends StatelessWidget implements PreferredSizeWidget {
           color: Colors.black,
         ),
       ),
+      centerTitle: true,
       title: Text(
         title,
         style: const TextStyle(
           color: Colors.black,
+          fontWeight: FontWeight.bold,
         ),
       ),
     );

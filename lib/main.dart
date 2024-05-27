@@ -6,6 +6,8 @@ import 'package:rekmed/repository/auth/auth_repository.dart';
 import 'package:rekmed/utlis/theme.dart';
 import 'package:rekmed/view/screens/HomeWrapper.dart';
 import 'package:rekmed/view/screens/auth/signin/SignInPage.dart';
+import 'package:rekmed/view/screens/doctor/DoctorProfilePage.dart';
+import 'package:rekmed/view/screens/patient/PatientProfilePage.dart';
 import 'firebase_options.dart';
 
 Future<void> main() async {
@@ -33,13 +35,13 @@ class MainApp extends StatelessWidget {
             return state.when(initial: () {
               return const Scaffold(
                 body: Center(
-                  child: CircularProgressIndicator(),
+                  child: Text(""),
                 ),
               );
             }, authenticated: (clinic) {
               return const HomeWrapper();
             }, unauthenticated: () {
-              return const SignInPage();
+              return const PatientProfilePage();
             }, loading: () {
               return const Scaffold(
                 body: Center(
