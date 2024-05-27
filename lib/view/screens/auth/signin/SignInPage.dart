@@ -3,12 +3,22 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rekmed/app/auth/cubit/auth_cubit.dart';
 import 'package:rekmed/view/widgets/auth/AuthForm.dart';
 import 'package:rekmed/view/widgets/auth/Button.dart';
+import 'package:rekmed/view/screens/auth/signup/SignUpPage.dart';
 
 class SignInPage extends StatefulWidget {
   const SignInPage({super.key});
 
   @override
   State<SignInPage> createState() => _SignInPageState();
+}
+
+void _navigateToSignUpPage(BuildContext context) {
+  Navigator.push(
+    context,
+    MaterialPageRoute(
+      builder: (context) => const SignUpPage(),
+    ),
+  );
 }
 
 class _SignInPageState extends State<SignInPage> {
@@ -34,7 +44,7 @@ class _SignInPageState extends State<SignInPage> {
                         fontWeight: FontWeight.bold,
                       )),
                 ),
-                const SizedBox(height: 67),
+                const SizedBox(height: 60),
 
                 /// input username
                 AuthForm(
@@ -89,26 +99,29 @@ class _SignInPageState extends State<SignInPage> {
                   },
                   text: 'Sign In',
                 ),
+
                 const SizedBox(height: 10),
+
                 Container(
                   height: 20,
                   alignment: Alignment.center,
-                  child: const Row(
+                  child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text('Belum memiliki Akun? ',
                           style: TextStyle(
-                              color: Color(0xff646464), fontSize: 13)),
+                              color: Color(0xff646464), fontSize: 12)),
                       InkWell(
+                        onTap: () => _navigateToSignUpPage(context),
                         child: Text(
                           'Sign Up',
                           style: TextStyle(
                             color: Color(0xff646464),
-                            fontSize: 13,
+                            fontSize: 12,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                      )
+                      ),
                     ],
                   ),
                 )
