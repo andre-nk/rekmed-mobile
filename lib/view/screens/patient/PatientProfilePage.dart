@@ -1,8 +1,6 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:rekmed/view/widgets/doctor/ProfileForm.dart';
 import 'package:rekmed/view/widgets/navigation/AppBar.dart';
-import 'package:rekmed/view/widgets/doctor/DoctorProfilePicture.dart';
 import 'package:rekmed/view/widgets/patient/RekMedBox.dart';
 
 class PatientProfilePage extends StatelessWidget {

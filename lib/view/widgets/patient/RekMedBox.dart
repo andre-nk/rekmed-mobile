@@ -22,8 +22,7 @@ class Rekmedbox extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        // Aksi yang dijalankan saat box ditekan
-        // Misalnya, navigasi ke halaman detail rekam medis
+
       },
       child: Container(
         padding: const EdgeInsets.all(16.0),

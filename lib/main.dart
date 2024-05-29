@@ -9,6 +9,7 @@ import 'package:rekmed/view/screens/auth/signin/SignInPage.dart';
 import 'package:rekmed/view/screens/doctor/DoctorProfilePage.dart';
 import 'package:rekmed/view/screens/patient/PatientProfilePage.dart';
 import 'firebase_options.dart';
+import 'view/screens/rekmed/RekMedPage.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -41,7 +42,7 @@ class MainApp extends StatelessWidget {
             }, authenticated: (clinic) {
               return const HomeWrapper();
             }, unauthenticated: () {
-              return const PatientProfilePage();
+              return const RekMedPage();
             }, loading: () {
               return const Scaffold(
                 body: Center(
