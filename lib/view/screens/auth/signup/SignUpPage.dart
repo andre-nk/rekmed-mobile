@@ -164,11 +164,11 @@ class _SignUpPageState extends State<SignUpPage> {
                     children: [
                       // ignore: prefer_const_constructors
                       Text('Sudah memiliki akun? ',
-                          style: TextStyle(
+                          style: const TextStyle(
                               color: Color(0xff646464), fontSize: 12)),
                       InkWell(
                         onTap: () => _navigateToSignInPage(context),
-                        child: Text(
+                        child: const Text(
                           'Sign In',
                           style: TextStyle(
                             color: Color(0xff646464),

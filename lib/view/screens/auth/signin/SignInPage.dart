@@ -108,12 +108,12 @@ class _SignInPageState extends State<SignInPage> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text('Belum memiliki Akun? ',
+                      const Text('Belum memiliki Akun? ',
                           style: TextStyle(
                               color: Color(0xff646464), fontSize: 12)),
                       InkWell(
                         onTap: () => _navigateToSignUpPage(context),
-                        child: Text(
+                        child: const Text(
                           'Sign Up',
                           style: TextStyle(
                             color: Color(0xff646464),

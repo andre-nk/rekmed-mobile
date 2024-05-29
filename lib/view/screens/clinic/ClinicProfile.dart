@@ -4,7 +4,7 @@ class ClinicProfile extends StatefulWidget {
   const ClinicProfile({super.key});
 
   @override
-  _ClinicProfileState createState() => _ClinicProfileState();
+  State<ClinicProfile> createState() => _ClinicProfileState();
 }
 
 class _ClinicProfileState extends State<ClinicProfile> {
@@ -37,7 +37,7 @@ class _ClinicProfileState extends State<ClinicProfile> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Container(
+              SizedBox(
                 height: 120.0,
                 child: Row(
                   mainAxisSize: MainAxisSize.max,
@@ -47,13 +47,13 @@ class _ClinicProfileState extends State<ClinicProfile> {
                       'assets/RekmedLogo.png',
                       height: 50,
                     ),
-                    SizedBox(width: 10),
+                    const SizedBox(width: 10),
                   ],
                 ),
               ),
               Container(
-                padding: EdgeInsets.symmetric(vertical: 8.0),
-                child: Text(
+                padding: const EdgeInsets.symmetric(vertical: 8.0),
+                child: const Text(
                   'Informasi Akun',
                   style: TextStyle(
                     fontSize: 18,
@@ -62,7 +62,7 @@ class _ClinicProfileState extends State<ClinicProfile> {
                   ),
                 ),
               ),
-              Divider(color: Colors.teal),
+              const Divider(color: Colors.teal),
               InfoRow(
                 title: 'Nama Klinik',
                 value: clinicName,
@@ -81,10 +81,10 @@ class _ClinicProfileState extends State<ClinicProfile> {
                   });
                 },
               ),
-              SizedBox(height: 16.0),
+              const SizedBox(height: 16.0),
               Container(
-                padding: EdgeInsets.symmetric(vertical: 8.0),
-                child: Text(
+                padding: const EdgeInsets.symmetric(vertical: 8.0),
+                child: const Text(
                   'Informasi Klinik',
                   style: TextStyle(
                     fontSize: 18,
@@ -93,7 +93,7 @@ class _ClinicProfileState extends State<ClinicProfile> {
                   ),
                 ),
               ),
-              Divider(color: Colors.teal),
+              const Divider(color: Colors.teal),
               InfoRow(
                 title: 'E-mail Klinik',
                 value: clinicEmail,
@@ -152,7 +152,7 @@ class InfoRow extends StatelessWidget {
   final String value;
   final Function(String)? onSave;
 
-  InfoRow({required this.title, required this.value, this.onSave});
+  const InfoRow({super.key, required this.title, required this.value, this.onSave});
 
   @override
   Widget build(BuildContext context) {
@@ -162,21 +162,21 @@ class InfoRow extends StatelessWidget {
         children: [
           Text(
             title,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 16,
               color: Colors.black54,
             ),
           ),
-          Spacer(),
+          const Spacer(),
           GestureDetector(
             onTap: () {
               showDialog(
                 context: context,
                 builder: (BuildContext context) {
-                  TextEditingController _controller = TextEditingController(text: value);
+                  TextEditingController controller = TextEditingController(text: value);
                   return Theme(
                     data: Theme.of(context).copyWith(
-                      textSelectionTheme: TextSelectionThemeData(
+                      textSelectionTheme: const TextSelectionThemeData(
                         cursorColor: Colors.teal,
                         selectionHandleColor: Colors.teal,
                       ),
@@ -184,17 +184,17 @@ class InfoRow extends StatelessWidget {
                     child: AlertDialog(
                       title: Text('Edit $title'),
                       content: TextField(
-                        controller: _controller,
+                        controller: controller,
                         decoration: InputDecoration(
-                          hintText: "$title",
-                          focusedBorder: UnderlineInputBorder(
+                          hintText: title,
+                          focusedBorder: const UnderlineInputBorder(
                             borderSide: BorderSide(color: Colors.teal),
                           ),
                         ),
                       ),
                       actions: [
                         TextButton(
-                          child: Text(
+                          child: const Text(
                             "Cancel",
                             style: TextStyle(color: Colors.teal),
                           ),
@@ -203,13 +203,13 @@ class InfoRow extends StatelessWidget {
                           },
                         ),
                         TextButton(
-                          child: Text(
+                          child: const Text(
                             "Save",
                             style: TextStyle(color: Colors.teal),
                           ),
                           onPressed: () {
                             if (onSave != null) {
-                              onSave!(_controller.text);
+                              onSave!(controller.text);
                             }
                             Navigator.of(context).pop();
                           },
@@ -224,13 +224,13 @@ class InfoRow extends StatelessWidget {
               children: [
                 Text(
                   value,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 16,
                     color: Colors.black,
                   ),
                 ),
-                SizedBox(width: 8),
-                Icon(
+                const SizedBox(width: 8),
+                const Icon(
                   Icons.arrow_forward_ios,
                   size: 16,
                   color: Colors.black54,
