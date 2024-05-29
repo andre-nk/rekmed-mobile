@@ -13,6 +13,8 @@ _$DoctorImpl _$$DoctorImplFromJson(Map<String, dynamic> json) => _$DoctorImpl(
       nik: (json['nik'] as num).toInt(),
       str: (json['str'] as num).toInt(),
       poli: $enumDecode(_$PoliEnumMap, json['poli']),
+      createdAt: DateTime.parse(json['createdAt'] as String),
+      updatedAt: DateTime.parse(json['updatedAt'] as String),
     );
 
 Map<String, dynamic> _$$DoctorImplToJson(_$DoctorImpl instance) =>
@@ -23,6 +25,8 @@ Map<String, dynamic> _$$DoctorImplToJson(_$DoctorImpl instance) =>
       'nik': instance.nik,
       'str': instance.str,
       'poli': _$PoliEnumMap[instance.poli]!,
+      'createdAt': instance.createdAt.toIso8601String(),
+      'updatedAt': instance.updatedAt.toIso8601String(),
     };
 
 const _$PoliEnumMap = {
@@ -43,5 +47,6 @@ const _$PoliEnumMap = {
   Poli.ginjal: 'ginjal',
   Poli.lambung: 'lambung',
   Poli.hati: 'hati',
+  Poli.penyakitDalam: 'penyakitDalam',
   Poli.endokrin: 'endokrin',
 };

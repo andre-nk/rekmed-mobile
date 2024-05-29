@@ -15,6 +15,8 @@ _$PatientImpl _$$PatientImplFromJson(Map<String, dynamic> json) =>
       poli: $enumDecode(_$PoliEnumMap, json['poli']),
       rekmed:
           (json['rekmed'] as List<dynamic>).map((e) => e as String).toList(),
+      createdAt: DateTime.parse(json['createdAt'] as String),
+      updatedAt: DateTime.parse(json['updatedAt'] as String),
     );
 
 Map<String, dynamic> _$$PatientImplToJson(_$PatientImpl instance) =>
@@ -25,6 +27,8 @@ Map<String, dynamic> _$$PatientImplToJson(_$PatientImpl instance) =>
       'address': instance.address,
       'poli': _$PoliEnumMap[instance.poli]!,
       'rekmed': instance.rekmed,
+      'createdAt': instance.createdAt.toIso8601String(),
+      'updatedAt': instance.updatedAt.toIso8601String(),
     };
 
 const _$PoliEnumMap = {
@@ -45,5 +49,6 @@ const _$PoliEnumMap = {
   Poli.ginjal: 'ginjal',
   Poli.lambung: 'lambung',
   Poli.hati: 'hati',
+  Poli.penyakitDalam: 'penyakitDalam',
   Poli.endokrin: 'endokrin',
 };

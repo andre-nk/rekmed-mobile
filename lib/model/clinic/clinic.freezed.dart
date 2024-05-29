@@ -28,6 +28,8 @@ mixin _$Clinic {
   String get address => throw _privateConstructorUsedError;
   String get bpjs => throw _privateConstructorUsedError;
   String get satuSehat => throw _privateConstructorUsedError;
+  DateTime get createdAt => throw _privateConstructorUsedError;
+  DateTime get updatedAt => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -47,7 +49,9 @@ abstract class $ClinicCopyWith<$Res> {
       int phone,
       String address,
       String bpjs,
-      String satuSehat});
+      String satuSehat,
+      DateTime createdAt,
+      DateTime updatedAt});
 }
 
 /// @nodoc
@@ -71,6 +75,8 @@ class _$ClinicCopyWithImpl<$Res, $Val extends Clinic>
     Object? address = null,
     Object? bpjs = null,
     Object? satuSehat = null,
+    Object? createdAt = null,
+    Object? updatedAt = null,
   }) {
     return _then(_value.copyWith(
       uid: null == uid
@@ -105,6 +111,14 @@ class _$ClinicCopyWithImpl<$Res, $Val extends Clinic>
           ? _value.satuSehat
           : satuSehat // ignore: cast_nullable_to_non_nullable
               as String,
+      createdAt: null == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      updatedAt: null == updatedAt
+          ? _value.updatedAt
+          : updatedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
     ) as $Val);
   }
 }
@@ -124,7 +138,9 @@ abstract class _$$ClinicImplCopyWith<$Res> implements $ClinicCopyWith<$Res> {
       int phone,
       String address,
       String bpjs,
-      String satuSehat});
+      String satuSehat,
+      DateTime createdAt,
+      DateTime updatedAt});
 }
 
 /// @nodoc
@@ -146,6 +162,8 @@ class __$$ClinicImplCopyWithImpl<$Res>
     Object? address = null,
     Object? bpjs = null,
     Object? satuSehat = null,
+    Object? createdAt = null,
+    Object? updatedAt = null,
   }) {
     return _then(_$ClinicImpl(
       uid: null == uid
@@ -180,13 +198,21 @@ class __$$ClinicImplCopyWithImpl<$Res>
           ? _value.satuSehat
           : satuSehat // ignore: cast_nullable_to_non_nullable
               as String,
+      createdAt: null == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      updatedAt: null == updatedAt
+          ? _value.updatedAt
+          : updatedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
     ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$ClinicImpl implements _Clinic {
+class _$ClinicImpl extends _Clinic {
   const _$ClinicImpl(
       {required this.uid,
       required this.name,
@@ -195,7 +221,10 @@ class _$ClinicImpl implements _Clinic {
       required this.phone,
       required this.address,
       required this.bpjs,
-      required this.satuSehat});
+      required this.satuSehat,
+      required this.createdAt,
+      required this.updatedAt})
+      : super._();
 
   factory _$ClinicImpl.fromJson(Map<String, dynamic> json) =>
       _$$ClinicImplFromJson(json);
@@ -216,10 +245,14 @@ class _$ClinicImpl implements _Clinic {
   final String bpjs;
   @override
   final String satuSehat;
+  @override
+  final DateTime createdAt;
+  @override
+  final DateTime updatedAt;
 
   @override
   String toString() {
-    return 'Clinic(uid: $uid, name: $name, username: $username, email: $email, phone: $phone, address: $address, bpjs: $bpjs, satuSehat: $satuSehat)';
+    return 'Clinic(uid: $uid, name: $name, username: $username, email: $email, phone: $phone, address: $address, bpjs: $bpjs, satuSehat: $satuSehat, createdAt: $createdAt, updatedAt: $updatedAt)';
   }
 
   @override
@@ -236,13 +269,17 @@ class _$ClinicImpl implements _Clinic {
             (identical(other.address, address) || other.address == address) &&
             (identical(other.bpjs, bpjs) || other.bpjs == bpjs) &&
             (identical(other.satuSehat, satuSehat) ||
-                other.satuSehat == satuSehat));
+                other.satuSehat == satuSehat) &&
+            (identical(other.createdAt, createdAt) ||
+                other.createdAt == createdAt) &&
+            (identical(other.updatedAt, updatedAt) ||
+                other.updatedAt == updatedAt));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType, uid, name, username, email, phone, address, bpjs, satuSehat);
+  int get hashCode => Object.hash(runtimeType, uid, name, username, email,
+      phone, address, bpjs, satuSehat, createdAt, updatedAt);
 
   @JsonKey(ignore: true)
   @override
@@ -258,7 +295,7 @@ class _$ClinicImpl implements _Clinic {
   }
 }
 
-abstract class _Clinic implements Clinic {
+abstract class _Clinic extends Clinic {
   const factory _Clinic(
       {required final String uid,
       required final String name,
@@ -267,7 +304,10 @@ abstract class _Clinic implements Clinic {
       required final int phone,
       required final String address,
       required final String bpjs,
-      required final String satuSehat}) = _$ClinicImpl;
+      required final String satuSehat,
+      required final DateTime createdAt,
+      required final DateTime updatedAt}) = _$ClinicImpl;
+  const _Clinic._() : super._();
 
   factory _Clinic.fromJson(Map<String, dynamic> json) = _$ClinicImpl.fromJson;
 
@@ -287,6 +327,10 @@ abstract class _Clinic implements Clinic {
   String get bpjs;
   @override
   String get satuSehat;
+  @override
+  DateTime get createdAt;
+  @override
+  DateTime get updatedAt;
   @override
   @JsonKey(ignore: true)
   _$$ClinicImplCopyWith<_$ClinicImpl> get copyWith =>

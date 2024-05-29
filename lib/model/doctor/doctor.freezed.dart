@@ -26,6 +26,8 @@ mixin _$Doctor {
   int get nik => throw _privateConstructorUsedError;
   int get str => throw _privateConstructorUsedError;
   Poli get poli => throw _privateConstructorUsedError;
+  DateTime get createdAt => throw _privateConstructorUsedError;
+  DateTime get updatedAt => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -37,7 +39,15 @@ abstract class $DoctorCopyWith<$Res> {
   factory $DoctorCopyWith(Doctor value, $Res Function(Doctor) then) =
       _$DoctorCopyWithImpl<$Res, Doctor>;
   @useResult
-  $Res call({String id, String name, int phone, int nik, int str, Poli poli});
+  $Res call(
+      {String id,
+      String name,
+      int phone,
+      int nik,
+      int str,
+      Poli poli,
+      DateTime createdAt,
+      DateTime updatedAt});
 }
 
 /// @nodoc
@@ -59,6 +69,8 @@ class _$DoctorCopyWithImpl<$Res, $Val extends Doctor>
     Object? nik = null,
     Object? str = null,
     Object? poli = null,
+    Object? createdAt = null,
+    Object? updatedAt = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -85,6 +97,14 @@ class _$DoctorCopyWithImpl<$Res, $Val extends Doctor>
           ? _value.poli
           : poli // ignore: cast_nullable_to_non_nullable
               as Poli,
+      createdAt: null == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      updatedAt: null == updatedAt
+          ? _value.updatedAt
+          : updatedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
     ) as $Val);
   }
 }
@@ -96,7 +116,15 @@ abstract class _$$DoctorImplCopyWith<$Res> implements $DoctorCopyWith<$Res> {
       __$$DoctorImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String id, String name, int phone, int nik, int str, Poli poli});
+  $Res call(
+      {String id,
+      String name,
+      int phone,
+      int nik,
+      int str,
+      Poli poli,
+      DateTime createdAt,
+      DateTime updatedAt});
 }
 
 /// @nodoc
@@ -116,6 +144,8 @@ class __$$DoctorImplCopyWithImpl<$Res>
     Object? nik = null,
     Object? str = null,
     Object? poli = null,
+    Object? createdAt = null,
+    Object? updatedAt = null,
   }) {
     return _then(_$DoctorImpl(
       id: null == id
@@ -142,6 +172,14 @@ class __$$DoctorImplCopyWithImpl<$Res>
           ? _value.poli
           : poli // ignore: cast_nullable_to_non_nullable
               as Poli,
+      createdAt: null == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      updatedAt: null == updatedAt
+          ? _value.updatedAt
+          : updatedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
     ));
   }
 }
@@ -155,7 +193,9 @@ class _$DoctorImpl implements _Doctor {
       required this.phone,
       required this.nik,
       required this.str,
-      required this.poli});
+      required this.poli,
+      required this.createdAt,
+      required this.updatedAt});
 
   factory _$DoctorImpl.fromJson(Map<String, dynamic> json) =>
       _$$DoctorImplFromJson(json);
@@ -172,10 +212,14 @@ class _$DoctorImpl implements _Doctor {
   final int str;
   @override
   final Poli poli;
+  @override
+  final DateTime createdAt;
+  @override
+  final DateTime updatedAt;
 
   @override
   String toString() {
-    return 'Doctor(id: $id, name: $name, phone: $phone, nik: $nik, str: $str, poli: $poli)';
+    return 'Doctor(id: $id, name: $name, phone: $phone, nik: $nik, str: $str, poli: $poli, createdAt: $createdAt, updatedAt: $updatedAt)';
   }
 
   @override
@@ -188,12 +232,17 @@ class _$DoctorImpl implements _Doctor {
             (identical(other.phone, phone) || other.phone == phone) &&
             (identical(other.nik, nik) || other.nik == nik) &&
             (identical(other.str, str) || other.str == str) &&
-            (identical(other.poli, poli) || other.poli == poli));
+            (identical(other.poli, poli) || other.poli == poli) &&
+            (identical(other.createdAt, createdAt) ||
+                other.createdAt == createdAt) &&
+            (identical(other.updatedAt, updatedAt) ||
+                other.updatedAt == updatedAt));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, name, phone, nik, str, poli);
+  int get hashCode => Object.hash(
+      runtimeType, id, name, phone, nik, str, poli, createdAt, updatedAt);
 
   @JsonKey(ignore: true)
   @override
@@ -216,7 +265,9 @@ abstract class _Doctor implements Doctor {
       required final int phone,
       required final int nik,
       required final int str,
-      required final Poli poli}) = _$DoctorImpl;
+      required final Poli poli,
+      required final DateTime createdAt,
+      required final DateTime updatedAt}) = _$DoctorImpl;
 
   factory _Doctor.fromJson(Map<String, dynamic> json) = _$DoctorImpl.fromJson;
 
@@ -232,6 +283,10 @@ abstract class _Doctor implements Doctor {
   int get str;
   @override
   Poli get poli;
+  @override
+  DateTime get createdAt;
+  @override
+  DateTime get updatedAt;
   @override
   @JsonKey(ignore: true)
   _$$DoctorImplCopyWith<_$DoctorImpl> get copyWith =>
