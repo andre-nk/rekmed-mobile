@@ -7,8 +7,6 @@ import 'package:rekmed/app/auth/cubit/auth_cubit.dart';
 import 'package:rekmed/repository/auth/auth_repository.dart';
 import 'package:rekmed/repository/clinic/clinic_repository.dart';
 import 'package:rekmed/utlis/theme.dart';
-import 'package:rekmed/view/screens/HomeWrapper.dart';
-import 'package:rekmed/view/screens/auth/signin/SignInPage.dart';
 import 'firebase_options.dart';
 
 Future<void> main() async {
