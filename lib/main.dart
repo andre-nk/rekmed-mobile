@@ -9,6 +9,8 @@ import 'package:rekmed/repository/clinic/clinic_repository.dart';
 import 'package:rekmed/utlis/theme.dart';
 import 'package:rekmed/view/screens/HomeWrapper.dart';
 import 'package:rekmed/view/screens/auth/signin/SignInPage.dart';
+import 'package:rekmed/view/screens/doctor/DoctorProfilePage.dart';
+import 'package:rekmed/view/screens/patient/PatientProfilePage.dart';
 import 'firebase_options.dart';
 
 Future<void> main() async {
