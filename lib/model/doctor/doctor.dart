@@ -7,13 +7,16 @@ part 'doctor.g.dart';
 
 @freezed
 abstract class Doctor with _$Doctor {
-  const factory Doctor(
-      {required String id,
-      required String name,
-      required int phone,
-      required int nik,
-      required int str,
-      required Poli poli}) = _Doctor;
+  const factory Doctor({
+    required String id,
+    required String name,
+    required int phone,
+    required int nik,
+    required int str,
+    required Poli poli,
+    required DateTime createdAt,
+    required DateTime updatedAt,
+  }) = _Doctor;
 
   factory Doctor.fromJson(Map<String, dynamic> json) => _$DoctorFromJson(json);
 }

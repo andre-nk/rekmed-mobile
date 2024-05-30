@@ -26,6 +26,8 @@ mixin _$Patient {
   String get address => throw _privateConstructorUsedError;
   Poli get poli => throw _privateConstructorUsedError;
   List<String> get rekmed => throw _privateConstructorUsedError;
+  DateTime get createdAt => throw _privateConstructorUsedError;
+  DateTime get updatedAt => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -43,7 +45,9 @@ abstract class $PatientCopyWith<$Res> {
       DateTime date,
       String address,
       Poli poli,
-      List<String> rekmed});
+      List<String> rekmed,
+      DateTime createdAt,
+      DateTime updatedAt});
 }
 
 /// @nodoc
@@ -65,6 +69,8 @@ class _$PatientCopyWithImpl<$Res, $Val extends Patient>
     Object? address = null,
     Object? poli = null,
     Object? rekmed = null,
+    Object? createdAt = null,
+    Object? updatedAt = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -91,6 +97,14 @@ class _$PatientCopyWithImpl<$Res, $Val extends Patient>
           ? _value.rekmed
           : rekmed // ignore: cast_nullable_to_non_nullable
               as List<String>,
+      createdAt: null == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      updatedAt: null == updatedAt
+          ? _value.updatedAt
+          : updatedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
     ) as $Val);
   }
 }
@@ -108,7 +122,9 @@ abstract class _$$PatientImplCopyWith<$Res> implements $PatientCopyWith<$Res> {
       DateTime date,
       String address,
       Poli poli,
-      List<String> rekmed});
+      List<String> rekmed,
+      DateTime createdAt,
+      DateTime updatedAt});
 }
 
 /// @nodoc
@@ -128,6 +144,8 @@ class __$$PatientImplCopyWithImpl<$Res>
     Object? address = null,
     Object? poli = null,
     Object? rekmed = null,
+    Object? createdAt = null,
+    Object? updatedAt = null,
   }) {
     return _then(_$PatientImpl(
       id: null == id
@@ -154,6 +172,14 @@ class __$$PatientImplCopyWithImpl<$Res>
           ? _value._rekmed
           : rekmed // ignore: cast_nullable_to_non_nullable
               as List<String>,
+      createdAt: null == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      updatedAt: null == updatedAt
+          ? _value.updatedAt
+          : updatedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
     ));
   }
 }
@@ -167,7 +193,9 @@ class _$PatientImpl implements _Patient {
       required this.date,
       required this.address,
       required this.poli,
-      required final List<String> rekmed})
+      required final List<String> rekmed,
+      required this.createdAt,
+      required this.updatedAt})
       : _rekmed = rekmed;
 
   factory _$PatientImpl.fromJson(Map<String, dynamic> json) =>
@@ -192,8 +220,13 @@ class _$PatientImpl implements _Patient {
   }
 
   @override
+  final DateTime createdAt;
+  @override
+  final DateTime updatedAt;
+
+  @override
   String toString() {
-    return 'Patient(id: $id, name: $name, date: $date, address: $address, poli: $poli, rekmed: $rekmed)';
+    return 'Patient(id: $id, name: $name, date: $date, address: $address, poli: $poli, rekmed: $rekmed, createdAt: $createdAt, updatedAt: $updatedAt)';
   }
 
   @override
@@ -206,13 +239,17 @@ class _$PatientImpl implements _Patient {
             (identical(other.date, date) || other.date == date) &&
             (identical(other.address, address) || other.address == address) &&
             (identical(other.poli, poli) || other.poli == poli) &&
-            const DeepCollectionEquality().equals(other._rekmed, _rekmed));
+            const DeepCollectionEquality().equals(other._rekmed, _rekmed) &&
+            (identical(other.createdAt, createdAt) ||
+                other.createdAt == createdAt) &&
+            (identical(other.updatedAt, updatedAt) ||
+                other.updatedAt == updatedAt));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, id, name, date, address, poli,
-      const DeepCollectionEquality().hash(_rekmed));
+      const DeepCollectionEquality().hash(_rekmed), createdAt, updatedAt);
 
   @JsonKey(ignore: true)
   @override
@@ -235,7 +272,9 @@ abstract class _Patient implements Patient {
       required final DateTime date,
       required final String address,
       required final Poli poli,
-      required final List<String> rekmed}) = _$PatientImpl;
+      required final List<String> rekmed,
+      required final DateTime createdAt,
+      required final DateTime updatedAt}) = _$PatientImpl;
 
   factory _Patient.fromJson(Map<String, dynamic> json) = _$PatientImpl.fromJson;
 
@@ -251,6 +290,10 @@ abstract class _Patient implements Patient {
   Poli get poli;
   @override
   List<String> get rekmed;
+  @override
+  DateTime get createdAt;
+  @override
+  DateTime get updatedAt;
   @override
   @JsonKey(ignore: true)
   _$$PatientImplCopyWith<_$PatientImpl> get copyWith =>
