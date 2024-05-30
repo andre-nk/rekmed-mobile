@@ -15,6 +15,8 @@ _$ClinicImpl _$$ClinicImplFromJson(Map<String, dynamic> json) => _$ClinicImpl(
       address: json['address'] as String,
       bpjs: json['bpjs'] as String,
       satuSehat: json['satuSehat'] as String,
+      createdAt: DateTime.parse(json['createdAt'] as String),
+      updatedAt: DateTime.parse(json['updatedAt'] as String),
     );
 
 Map<String, dynamic> _$$ClinicImplToJson(_$ClinicImpl instance) =>
@@ -27,4 +29,6 @@ Map<String, dynamic> _$$ClinicImplToJson(_$ClinicImpl instance) =>
       'address': instance.address,
       'bpjs': instance.bpjs,
       'satuSehat': instance.satuSehat,
+      'createdAt': instance.createdAt.toIso8601String(),
+      'updatedAt': instance.updatedAt.toIso8601String(),
     };

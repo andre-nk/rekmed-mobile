@@ -2,13 +2,15 @@ import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:rekmed/model/clinic/clinic.dart';
 import 'package:rekmed/repository/auth/auth_repository.dart';
+import 'package:rekmed/repository/clinic/clinic_repository.dart';
 
 part 'auth_state.dart';
 part 'auth_cubit.freezed.dart';
 
 class AuthCubit extends Cubit<AuthState> {
   final AuthRepository authRepository;
-  AuthCubit(this.authRepository) : super(const AuthState.initial());
+  final ClinicRepository clinicRepository;
+  AuthCubit(this.authRepository, this.clinicRepository) : super(const AuthState.initial());
 
   void loading() {
     emit(const AuthState.loading());
