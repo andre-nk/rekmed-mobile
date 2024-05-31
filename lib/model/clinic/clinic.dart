@@ -13,7 +13,7 @@ abstract class Clinic with _$Clinic {
     required String name,
     required String username,
     required String email,
-    required int phone,
+    required String phone,
     required String address,
     required String bpjs,
     required String satuSehat,

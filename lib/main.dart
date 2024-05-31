@@ -1,4 +1,3 @@
-import 'package:connectivity_bloc/connectivity_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -11,6 +10,7 @@ import 'package:rekmed/view/screens/HomeWrapper.dart';
 import 'package:rekmed/view/screens/auth/signin/SignInPage.dart';
 import 'package:rekmed/view/screens/doctor/DoctorProfilePage.dart';
 import 'package:rekmed/view/screens/patient/PatientProfilePage.dart';
+import 'package:rekmed/view/widgets/shared/DefaultLoadingScreen.dart';
 import 'firebase_options.dart';
 import 'view/screens/rekmed/RekMedPage.dart';
 
@@ -37,53 +37,58 @@ class MainApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: AppTheme.theme,
       title: "Rekmed Mobile",
+      initialRoute: '/',
+      routes: {
+        '/signin': (context) => const SignInPage(),
+      },
       home: SafeArea(
-        child: MultiBlocProvider(
+        child: MultiRepositoryProvider(
           providers: [
-            BlocProvider(
-              create: (context) =>
-                  AuthCubit(AuthRepository(), ClinicRepository())..initialize(),
+            RepositoryProvider(
+              create: (context) => AuthRepository(),
             ),
-            BlocProvider(
-              create: (context) => ConnectivityBloc(),
+            RepositoryProvider(
+              create: (context) => ClinicRepository(),
             ),
           ],
-          child: BlocBuilder<ConnectivityBloc, ConnectivityState>(
-            builder: (context, connState) {
-              return BlocBuilder<AuthCubit, AuthState>(
-                builder: (context, AuthState authState) {
-                  return authState.when(
-                    initial: () {
-                      return const Scaffold(
-                        body: Center(
-                          child: CircularProgressIndicator(),
-                        ),
-                      );
-                    },
-                    authenticated: (clinic) {
-                      return const HomeWrapper();
-                    },
-                    unauthenticated: () {
-                      return const SignInPage();
-                    },
-                    loading: () {
-                      return const Scaffold(
-                        body: Center(
-                          child: CircularProgressIndicator(),
-                        ),
-                      );
-                    },
-                    error: (e) {
-                      return Scaffold(
-                        body: Center(
-                          child: Text(e),
-                        ),
-                      );
-                    },
+          child: BlocProvider(
+            create: (context) => AuthCubit(
+              context.read<AuthRepository>(),
+              context.read<ClinicRepository>(),
+            )..initialize(),
+            child: BlocConsumer<AuthCubit, AuthState>(
+              listener: (context, state) {
+                state.maybeWhen(
+                  orElse: () {},
+                  error: (msg) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text(msg),
+                      ),
+                    );
+                  },
+                );
+              },
+              builder: (context, authState) {
+                return authState.maybeWhen(orElse: () {
+                  return const DefaultLoadingScreen();
+                }, initial: () {
+                  return const DefaultLoadingScreen();
+                }, authenticated: (clinic) {
+                  return const HomeWrapper();
+                }, unauthenticated: () {
+                  return const SignInPage();
+                }, error: (e) {
+                  return const SignInPage();
+                }, loading: () {
+                  return const Scaffold(
+                    body: Center(
+                      child: CircularProgressIndicator(),
+                    ),
                   );
-                },
-              );
-            },
+                });
+              },
+            ),
           ),
         ),
       ),

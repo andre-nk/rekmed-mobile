@@ -8,12 +8,24 @@ class RekmedRepository {
 
   RekmedRepository() : _firebaseFirestore = FirebaseFirestore.instance;
 
-  Future<List<Rekmed>> getRekmedByUserID(String userID) async {
+  Future<List<Rekmed>> getRekmedByUserID(String userID, DateTime? date) async {
     try {
-      final rekmeds = await _firebaseFirestore
+      QuerySnapshot<Map<String, dynamic>> rekmeds;
+
+      if(date != null){
+        rekmeds = await _firebaseFirestore
+          .collection('rekmeds')
+          .where('userID', isEqualTo: userID)
+          .where('createdAt', isGreaterThanOrEqualTo: date)
+          .where('createdAt', isLessThanOrEqualTo: date.add(const Duration(days: 1)))
+          .get();
+      } else {
+        rekmeds = await _firebaseFirestore
           .collection('rekmeds')
           .where('userID', isEqualTo: userID)
           .get();
+      }
+
       return rekmeds.docs.map((e) => Rekmed.fromJson(e.data())).toList();
     } catch (e) {
       throw Exception(e);

@@ -7,23 +7,33 @@ class ClinicRepository {
 
   ClinicRepository() : _firebaseFirestore = FirebaseFirestore.instance;
 
-  Future<Clinic> getClinicById(User user, String uid) async {
+  Future<Clinic> getClinicById(User user) async {
     try {
-      final documentSnapshot =
-          await _firebaseFirestore.collection('clinics').doc(uid).get();
+      final documentSnapshot = await _firebaseFirestore
+          .collection('clinics')
+          .where("uid", isEqualTo: user.uid)
+          .get();
 
-      final Clinic clinic = Clinic(
-        uid: user.uid,
-        email: user.email!,
-        name: user.displayName!,
-        username: user.displayName!,
-        address: documentSnapshot.get('address'),
-        phone: documentSnapshot.get('phone'),
-        bpjs: documentSnapshot.get('bpjs'),
-        satuSehat: documentSnapshot.get('satuSehat'),
-        createdAt: documentSnapshot.get('createdAt').toDate(),
-        updatedAt: documentSnapshot.get('updatedAt').toDate(),
-      );
+      Clinic clinic;
+
+      if (documentSnapshot.docs.isNotEmpty) {
+        var rawClinic = documentSnapshot.docs.first.data();
+
+        clinic = Clinic(
+          uid: user.uid,
+          email: user.email!,
+          name: user.displayName!,
+          username: user.displayName!,
+          address: rawClinic['address'],
+          phone: rawClinic['phone'],
+          bpjs: rawClinic['bpjs'],
+          satuSehat: rawClinic['satuSehat'],
+          createdAt: DateTime.parse(rawClinic['createdAt']),
+          updatedAt: DateTime.parse(rawClinic['updatedAt']),
+        );
+      } else {
+        throw Exception('Clinic not found');
+      }
 
       return clinic;
     } catch (e) {
