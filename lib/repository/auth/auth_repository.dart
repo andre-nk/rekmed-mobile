@@ -17,7 +17,7 @@ class AuthRepository {
       required String address,
       required String bpjs,
       required String satuSehat,
-      required int phone}) async {
+      required String phone}) async {
     try {
       final UserCredential userCredential = await _firebaseAuth
           .createUserWithEmailAndPassword(email: email, password: password);
@@ -54,6 +54,14 @@ class AuthRepository {
     }
   }
 
+  Future<void> resetPassword({required String email}) async {
+    try {
+      await _firebaseAuth.sendPasswordResetEmail(email: email);
+    } on FirebaseAuthException catch (e) {
+      throw Exception(e.message);
+    }
+  }
+
   Future<void> signOut() async {
     await _firebaseAuth.signOut();
   }
@@ -61,9 +69,9 @@ class AuthRepository {
   Future<Clinic> getCurrentUser() async {
     final User? user = _firebaseAuth.currentUser;
     if (user != null) {
-      return await _clinicRepository.getClinicById(user, user.uid);
+      return await _clinicRepository.getClinicById(user);
     } else {
-      throw Exception('Clinic not found');
+      throw Exception("User's logged out");
     }
   }
 }

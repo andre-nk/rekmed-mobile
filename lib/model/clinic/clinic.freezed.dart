@@ -24,7 +24,7 @@ mixin _$Clinic {
   String get name => throw _privateConstructorUsedError;
   String get username => throw _privateConstructorUsedError;
   String get email => throw _privateConstructorUsedError;
-  int get phone => throw _privateConstructorUsedError;
+  String get phone => throw _privateConstructorUsedError;
   String get address => throw _privateConstructorUsedError;
   String get bpjs => throw _privateConstructorUsedError;
   String get satuSehat => throw _privateConstructorUsedError;
@@ -46,7 +46,7 @@ abstract class $ClinicCopyWith<$Res> {
       String name,
       String username,
       String email,
-      int phone,
+      String phone,
       String address,
       String bpjs,
       String satuSehat,
@@ -98,7 +98,7 @@ class _$ClinicCopyWithImpl<$Res, $Val extends Clinic>
       phone: null == phone
           ? _value.phone
           : phone // ignore: cast_nullable_to_non_nullable
-              as int,
+              as String,
       address: null == address
           ? _value.address
           : address // ignore: cast_nullable_to_non_nullable
@@ -135,7 +135,7 @@ abstract class _$$ClinicImplCopyWith<$Res> implements $ClinicCopyWith<$Res> {
       String name,
       String username,
       String email,
-      int phone,
+      String phone,
       String address,
       String bpjs,
       String satuSehat,
@@ -185,7 +185,7 @@ class __$$ClinicImplCopyWithImpl<$Res>
       phone: null == phone
           ? _value.phone
           : phone // ignore: cast_nullable_to_non_nullable
-              as int,
+              as String,
       address: null == address
           ? _value.address
           : address // ignore: cast_nullable_to_non_nullable
@@ -238,7 +238,7 @@ class _$ClinicImpl extends _Clinic {
   @override
   final String email;
   @override
-  final int phone;
+  final String phone;
   @override
   final String address;
   @override
@@ -301,7 +301,7 @@ abstract class _Clinic extends Clinic {
       required final String name,
       required final String username,
       required final String email,
-      required final int phone,
+      required final String phone,
       required final String address,
       required final String bpjs,
       required final String satuSehat,
@@ -320,7 +320,7 @@ abstract class _Clinic extends Clinic {
   @override
   String get email;
   @override
-  int get phone;
+  String get phone;
   @override
   String get address;
   @override

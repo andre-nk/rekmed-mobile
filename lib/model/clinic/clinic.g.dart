@@ -11,7 +11,7 @@ _$ClinicImpl _$$ClinicImplFromJson(Map<String, dynamic> json) => _$ClinicImpl(
       name: json['name'] as String,
       username: json['username'] as String,
       email: json['email'] as String,
-      phone: (json['phone'] as num).toInt(),
+      phone: json['phone'] as String,
       address: json['address'] as String,
       bpjs: json['bpjs'] as String,
       satuSehat: json['satuSehat'] as String,

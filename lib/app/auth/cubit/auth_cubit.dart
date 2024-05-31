@@ -10,7 +10,8 @@ part 'auth_cubit.freezed.dart';
 class AuthCubit extends Cubit<AuthState> {
   final AuthRepository authRepository;
   final ClinicRepository clinicRepository;
-  AuthCubit(this.authRepository, this.clinicRepository) : super(const AuthState.initial());
+  AuthCubit(this.authRepository, this.clinicRepository)
+      : super(const AuthState.initial());
 
   void loading() {
     emit(const AuthState.loading());
@@ -27,8 +28,8 @@ class AuthCubit extends Cubit<AuthState> {
       emit(const AuthState.loading());
       final Clinic clinic = await authRepository.getCurrentUser();
       emit(AuthState.authenticated(clinic));
-    } on Exception {
-      emit(const AuthState.unauthenticated());
+    } on Exception catch (e) {
+      emit(AuthState.error(e.toString()));
     }
   }
 
@@ -39,17 +40,18 @@ class AuthCubit extends Cubit<AuthState> {
       required String address,
       required String bpjs,
       required String satuSehat,
-      required int phone}) async {
+      required String phone}) async {
     try {
       emit(const AuthState.loading());
       final Clinic clinic = await authRepository.signUpWithEmailAndPassword(
-          email: email,
-          password: password,
-          name: name,
-          address: address,
-          bpjs: bpjs,
-          satuSehat: satuSehat,
-          phone: phone);
+        email: email,
+        password: password,
+        name: name,
+        address: address,
+        bpjs: bpjs,
+        satuSehat: satuSehat,
+        phone: phone,
+      );
       emit(AuthState.authenticated(clinic));
     } on Exception catch (e) {
       emit(AuthState.error(e.toString()));
@@ -73,6 +75,16 @@ class AuthCubit extends Cubit<AuthState> {
       emit(const AuthState.loading());
       await authRepository.signOut();
       emit(const AuthState.unauthenticated());
+    } on Exception catch (e) {
+      emit(AuthState.error(e.toString()));
+    }
+  }
+
+  Future<void> resetPassword(String email) async {
+    try {
+      emit(const AuthState.loading());
+      await authRepository.resetPassword(email: email);
+      emit(const AuthState.error("Reset password link has been sent to your email"));
     } on Exception catch (e) {
       emit(AuthState.error(e.toString()));
     }
