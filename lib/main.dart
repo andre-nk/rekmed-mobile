@@ -8,8 +8,11 @@ import 'package:rekmed/repository/clinic/clinic_repository.dart';
 import 'package:rekmed/utlis/theme.dart';
 import 'package:rekmed/view/screens/HomeWrapper.dart';
 import 'package:rekmed/view/screens/auth/signin/SignInPage.dart';
+import 'package:rekmed/view/screens/doctor/DoctorProfilePage.dart';
+import 'package:rekmed/view/screens/patient/PatientProfilePage.dart';
 import 'package:rekmed/view/widgets/shared/DefaultLoadingScreen.dart';
 import 'firebase_options.dart';
+import 'view/screens/rekmed/RekMedPage.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
