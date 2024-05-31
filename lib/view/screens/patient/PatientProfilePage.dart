@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:rekmed/view/widgets/doctor/ProfileForm.dart';
 import 'package:rekmed/view/widgets/navigation/AppBar.dart';
-import 'package:rekmed/view/widgets/patient/RekMedBox.dart';
+import 'package:rekmed/view/widgets/patient/RekmedBox.dart';
 
 class PatientProfilePage extends StatelessWidget {
   const PatientProfilePage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final TextEditingController nameController= TextEditingController();
+    final TextEditingController nameController = TextEditingController();
     final TextEditingController birthdayController = TextEditingController();
     final TextEditingController addressController = TextEditingController();
     final TextEditingController famController = TextEditingController();
@@ -77,16 +77,14 @@ class PatientProfilePage extends StatelessWidget {
                       },
                     ),
                   ],
-                )
-              ),
-              Container(
-                child: Rekmedbox(
-                  idRekamMedis: "123456",
-                  namaPasien: "Sandra Dewi",
-                  dokter: "dr. Andreas",
-                  tanggal: DateTime.now(),
                 ),
-              )
+              ),
+              RekmedBox(
+                idRekamMedis: "123456",
+                namaPasien: "Sandra Dewi",
+                dokter: "dr. Andreas",
+                tanggal: DateTime.now(),
+              ),
             ],
           ),
         ),
