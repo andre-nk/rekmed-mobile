@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 class HomeSearchBar extends StatefulWidget {
   const HomeSearchBar({super.key});

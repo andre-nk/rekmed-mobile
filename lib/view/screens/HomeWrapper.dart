@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:rekmed/view/screens/doctor/DoctorProfilePage.dart';
+import 'package:rekmed/view/screens/clinic/ClinicProfilePage.dart';
 import 'package:rekmed/view/screens/home/Home.dart';
 import 'package:rekmed/view/widgets/navigation/BottomNavBar.dart';
 
@@ -21,7 +21,11 @@ class _HomeWrapperState extends State<HomeWrapper> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: _selectedIndex == 0 ? const HomePage() : const DoctorProfilePage(),
+      body: _selectedIndex == 0
+          ? const HomePage()
+          : _selectedIndex == 3
+              ? const ClinicProfilePage()
+              : const HomePage(),
       bottomNavigationBar: BottomNavBar(
         selectedIndex: _selectedIndex,
         onItemTapped: _onItemTapped,

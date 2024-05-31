@@ -66,8 +66,16 @@ class HomePage extends StatelessWidget {
                   const Padding(
                     padding: EdgeInsets.only(top: 24.0),
                     child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        
+                        Text(
+                          "Data rekam medis terakhir",
+                          style: TextStyle(
+                            fontSize: 16.0,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black,
+                          ),
+                        ),
                       ],
                     ),
                   ),
