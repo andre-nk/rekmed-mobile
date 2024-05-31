@@ -115,8 +115,7 @@ class _SignInPageState extends State<SignInPage> {
                     } else {
                       ScaffoldMessenger.of(context).showSnackBar(
                         const SnackBar(
-                          content:
-                              Text('Email dan Password tidak boleh kosong'),
+                          content: Text('Email dan Password tidak boleh kosong'),
                         ),
                       );
                     }

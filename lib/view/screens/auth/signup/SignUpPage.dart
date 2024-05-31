@@ -188,6 +188,8 @@ class _SignUpPageState extends State<SignUpPage> {
                     text: 'Sign Up',
                   ),
 
+                const SizedBox(height: 10),
+
                   Container(
                     height: 20,
                     alignment: Alignment.center,
