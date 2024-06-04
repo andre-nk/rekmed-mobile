@@ -1,5 +1,4 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:rekmed/utlis/poli.dart';
 
 part 'patient.freezed.dart';
 
@@ -8,11 +7,11 @@ part 'patient.g.dart';
 @freezed
 abstract class Patient with _$Patient {
   const factory Patient({
-    required String id,
+    String? id,
+    required String clinicID,
     required String name,
     required DateTime date,
     required String address,
-    required Poli poli,
     required List<String> rekmed,
     required DateTime createdAt,
     required DateTime updatedAt,

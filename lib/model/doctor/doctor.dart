@@ -8,8 +8,11 @@ part 'doctor.g.dart';
 @freezed
 abstract class Doctor with _$Doctor {
   const factory Doctor({
-    required String id,
+    String? id,
+    required String profilePicture,
+    required String clinicID,
     required String name,
+    required String email,
     required int phone,
     required int nik,
     required int str,

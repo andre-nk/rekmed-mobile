@@ -7,8 +7,11 @@ part of 'doctor.dart';
 // **************************************************************************
 
 _$DoctorImpl _$$DoctorImplFromJson(Map<String, dynamic> json) => _$DoctorImpl(
-      id: json['id'] as String,
+      id: json['id'] as String?,
+      profilePicture: json['profilePicture'] as String,
+      clinicID: json['clinicID'] as String,
       name: json['name'] as String,
+      email: json['email'] as String,
       phone: (json['phone'] as num).toInt(),
       nik: (json['nik'] as num).toInt(),
       str: (json['str'] as num).toInt(),
@@ -20,7 +23,10 @@ _$DoctorImpl _$$DoctorImplFromJson(Map<String, dynamic> json) => _$DoctorImpl(
 Map<String, dynamic> _$$DoctorImplToJson(_$DoctorImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
+      'profilePicture': instance.profilePicture,
+      'clinicID': instance.clinicID,
       'name': instance.name,
+      'email': instance.email,
       'phone': instance.phone,
       'nik': instance.nik,
       'str': instance.str,

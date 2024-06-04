@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:rekmed/view/screens/clinic/ClinicProfilePage.dart';
-import 'package:rekmed/view/screens/home/Home.dart';
+import 'package:rekmed/view/screens/home/DoctorListPage.dart';
+import 'package:rekmed/view/screens/home/HomePage.dart';
+import 'package:rekmed/view/screens/home/PatientListPage.dart';
 import 'package:rekmed/view/widgets/navigation/BottomNavBar.dart';
 
 class HomeWrapper extends StatefulWidget {
@@ -23,9 +25,13 @@ class _HomeWrapperState extends State<HomeWrapper> {
     return Scaffold(
       body: _selectedIndex == 0
           ? const HomePage()
-          : _selectedIndex == 3
-              ? const ClinicProfilePage()
-              : const HomePage(),
+          : _selectedIndex == 1
+              ? const PatientListPage()
+              : _selectedIndex == 2
+                  ? const DoctorListPage()
+                  : _selectedIndex == 3
+                      ? const ClinicProfilePage()
+                      : const HomePage(),
       bottomNavigationBar: BottomNavBar(
         selectedIndex: _selectedIndex,
         onItemTapped: _onItemTapped,

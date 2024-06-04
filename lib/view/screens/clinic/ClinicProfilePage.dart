@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rekmed/app/auth/cubit/auth_cubit.dart';
 import 'package:rekmed/app/clinic/cubit/clinic_cubit.dart';
+import 'package:rekmed/view/widgets/auth/Button.dart';
 import 'package:rekmed/view/widgets/clinic/InfoRow.dart';
 
 class ClinicProfilePage extends StatelessWidget {
@@ -64,20 +65,25 @@ class ClinicProfilePage extends StatelessWidget {
                       InfoRow(
                         title: 'Nama Klinik',
                         value: clinic.name,
-                        onSave: (newValue) {
-                          context
+                        onSave: (newValue) async {
+                          await context
                               .read<ClinicCubit>()
                               .updateClinic(clinic.copyWith(name: newValue));
+
+                          // ignore: use_build_context_synchronously
                           context.read<AuthCubit>().initialize();
                         },
                       ),
                       InfoRow(
                         title: 'Username Klinik',
                         value: clinic.username,
-                        onSave: (newValue) {
-                          context
+                        onSave: (newValue) async {
+                          await context
                               .read<ClinicCubit>()
                               .updateClinic(clinic.copyWith(username: newValue));
+
+                          // ignore: use_build_context_synchronously
+                          context.read<AuthCubit>().initialize();
                         },
                       ),
                       const SizedBox(height: 16.0),
@@ -104,20 +110,23 @@ class ClinicProfilePage extends StatelessWidget {
                       InfoRow(
                         title: 'Alamat Klinik',
                         value: clinic.address,
-                        onSave: (newValue) {
-                          context
+                        onSave: (newValue) async {
+                          await context
                               .read<ClinicCubit>()
                               .updateClinic(clinic.copyWith(address: newValue));
+
+                          // ignore: use_build_context_synchronously
                           context.read<AuthCubit>().initialize();
                         },
                       ),
                       InfoRow(
                         title: 'No. BPJS',
                         value: clinic.bpjs.isEmpty ? "Belum diisi" : clinic.bpjs,
-                        onSave: (newValue) {
-                          context
+                        onSave: (newValue) async {
+                          await context
                               .read<ClinicCubit>()
                               .updateClinic(clinic.copyWith(bpjs: newValue));
+                          // ignore: use_build_context_synchronously
                           context.read<AuthCubit>().initialize();
                         },
                       ),
@@ -125,13 +134,21 @@ class ClinicProfilePage extends StatelessWidget {
                         title: 'No. SatuSehat',
                         value:
                             clinic.satuSehat.isEmpty ? "Belum diisi" : clinic.satuSehat,
-                        onSave: (newValue) {
-                          context
+                        onSave: (newValue) async {
+                          await context
                               .read<ClinicCubit>()
                               .updateClinic(clinic.copyWith(satuSehat: newValue));
+                          // ignore: use_build_context_synchronously
                           context.read<AuthCubit>().initialize();
                         },
                       ),
+                      const SizedBox(height: 36.0),
+                      Button(
+                        onPressed: () {
+                          context.read<AuthCubit>().signOut();
+                        },
+                        text: "Sign out",
+                      )
                     ],
                   );
                 },
@@ -148,4 +165,3 @@ class ClinicProfilePage extends StatelessWidget {
     );
   }
 }
-

@@ -26,7 +26,10 @@ class PatientRepository {
 
   Future<void> addPatient(Patient patient) async {
     try {
-      await _firebaseFirestore.collection('patients').add(patient.toJson());
+      await _firebaseFirestore
+          .collection('patients')
+          .doc(patient.id)
+          .set(patient.toJson());
     } catch (e) {
       throw Exception(e);
     }

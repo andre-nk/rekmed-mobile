@@ -21,20 +21,22 @@ Rekmed _$RekmedFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$Rekmed {
   @HiveField(1)
-  String get id => throw _privateConstructorUsedError;
+  String? get id => throw _privateConstructorUsedError;
   @HiveField(2)
-  String get name => throw _privateConstructorUsedError;
+  String get clinicID => throw _privateConstructorUsedError;
   @HiveField(3)
-  int get phone => throw _privateConstructorUsedError;
+  String get name => throw _privateConstructorUsedError;
   @HiveField(4)
-  int get nik => throw _privateConstructorUsedError;
+  int get phone => throw _privateConstructorUsedError;
   @HiveField(5)
-  int get str => throw _privateConstructorUsedError;
+  int get nik => throw _privateConstructorUsedError;
   @HiveField(6)
-  Poli get poli => throw _privateConstructorUsedError;
+  int get str => throw _privateConstructorUsedError;
   @HiveField(7)
-  DateTime get createdAt => throw _privateConstructorUsedError;
+  Poli get poli => throw _privateConstructorUsedError;
   @HiveField(8)
+  DateTime get createdAt => throw _privateConstructorUsedError;
+  @HiveField(9)
   DateTime get updatedAt => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -48,14 +50,15 @@ abstract class $RekmedCopyWith<$Res> {
       _$RekmedCopyWithImpl<$Res, Rekmed>;
   @useResult
   $Res call(
-      {@HiveField(1) String id,
-      @HiveField(2) String name,
-      @HiveField(3) int phone,
-      @HiveField(4) int nik,
-      @HiveField(5) int str,
-      @HiveField(6) Poli poli,
-      @HiveField(7) DateTime createdAt,
-      @HiveField(8) DateTime updatedAt});
+      {@HiveField(1) String? id,
+      @HiveField(2) String clinicID,
+      @HiveField(3) String name,
+      @HiveField(4) int phone,
+      @HiveField(5) int nik,
+      @HiveField(6) int str,
+      @HiveField(7) Poli poli,
+      @HiveField(8) DateTime createdAt,
+      @HiveField(9) DateTime updatedAt});
 }
 
 /// @nodoc
@@ -71,7 +74,8 @@ class _$RekmedCopyWithImpl<$Res, $Val extends Rekmed>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
+    Object? id = freezed,
+    Object? clinicID = null,
     Object? name = null,
     Object? phone = null,
     Object? nik = null,
@@ -81,9 +85,13 @@ class _$RekmedCopyWithImpl<$Res, $Val extends Rekmed>
     Object? updatedAt = null,
   }) {
     return _then(_value.copyWith(
-      id: null == id
+      id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
+              as String?,
+      clinicID: null == clinicID
+          ? _value.clinicID
+          : clinicID // ignore: cast_nullable_to_non_nullable
               as String,
       name: null == name
           ? _value.name
@@ -125,14 +133,15 @@ abstract class _$$RekmedImplCopyWith<$Res> implements $RekmedCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {@HiveField(1) String id,
-      @HiveField(2) String name,
-      @HiveField(3) int phone,
-      @HiveField(4) int nik,
-      @HiveField(5) int str,
-      @HiveField(6) Poli poli,
-      @HiveField(7) DateTime createdAt,
-      @HiveField(8) DateTime updatedAt});
+      {@HiveField(1) String? id,
+      @HiveField(2) String clinicID,
+      @HiveField(3) String name,
+      @HiveField(4) int phone,
+      @HiveField(5) int nik,
+      @HiveField(6) int str,
+      @HiveField(7) Poli poli,
+      @HiveField(8) DateTime createdAt,
+      @HiveField(9) DateTime updatedAt});
 }
 
 /// @nodoc
@@ -146,7 +155,8 @@ class __$$RekmedImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
+    Object? id = freezed,
+    Object? clinicID = null,
     Object? name = null,
     Object? phone = null,
     Object? nik = null,
@@ -156,9 +166,13 @@ class __$$RekmedImplCopyWithImpl<$Res>
     Object? updatedAt = null,
   }) {
     return _then(_$RekmedImpl(
-      id: null == id
+      id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
+              as String?,
+      clinicID: null == clinicID
+          ? _value.clinicID
+          : clinicID // ignore: cast_nullable_to_non_nullable
               as String,
       name: null == name
           ? _value.name
@@ -197,46 +211,50 @@ class __$$RekmedImplCopyWithImpl<$Res>
 @HiveType(typeId: 1, adapterName: 'RekmedAdapter')
 class _$RekmedImpl implements _Rekmed {
   const _$RekmedImpl(
-      {@HiveField(1) required this.id,
-      @HiveField(2) required this.name,
-      @HiveField(3) required this.phone,
-      @HiveField(4) required this.nik,
-      @HiveField(5) required this.str,
-      @HiveField(6) required this.poli,
-      @HiveField(7) required this.createdAt,
-      @HiveField(8) required this.updatedAt});
+      {@HiveField(1) this.id,
+      @HiveField(2) required this.clinicID,
+      @HiveField(3) required this.name,
+      @HiveField(4) required this.phone,
+      @HiveField(5) required this.nik,
+      @HiveField(6) required this.str,
+      @HiveField(7) required this.poli,
+      @HiveField(8) required this.createdAt,
+      @HiveField(9) required this.updatedAt});
 
   factory _$RekmedImpl.fromJson(Map<String, dynamic> json) =>
       _$$RekmedImplFromJson(json);
 
   @override
   @HiveField(1)
-  final String id;
+  final String? id;
   @override
   @HiveField(2)
-  final String name;
+  final String clinicID;
   @override
   @HiveField(3)
-  final int phone;
+  final String name;
   @override
   @HiveField(4)
-  final int nik;
+  final int phone;
   @override
   @HiveField(5)
-  final int str;
+  final int nik;
   @override
   @HiveField(6)
-  final Poli poli;
+  final int str;
   @override
   @HiveField(7)
-  final DateTime createdAt;
+  final Poli poli;
   @override
   @HiveField(8)
+  final DateTime createdAt;
+  @override
+  @HiveField(9)
   final DateTime updatedAt;
 
   @override
   String toString() {
-    return 'Rekmed(id: $id, name: $name, phone: $phone, nik: $nik, str: $str, poli: $poli, createdAt: $createdAt, updatedAt: $updatedAt)';
+    return 'Rekmed(id: $id, clinicID: $clinicID, name: $name, phone: $phone, nik: $nik, str: $str, poli: $poli, createdAt: $createdAt, updatedAt: $updatedAt)';
   }
 
   @override
@@ -245,6 +263,8 @@ class _$RekmedImpl implements _Rekmed {
         (other.runtimeType == runtimeType &&
             other is _$RekmedImpl &&
             (identical(other.id, id) || other.id == id) &&
+            (identical(other.clinicID, clinicID) ||
+                other.clinicID == clinicID) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.phone, phone) || other.phone == phone) &&
             (identical(other.nik, nik) || other.nik == nik) &&
@@ -258,8 +278,8 @@ class _$RekmedImpl implements _Rekmed {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType, id, name, phone, nik, str, poli, createdAt, updatedAt);
+  int get hashCode => Object.hash(runtimeType, id, clinicID, name, phone, nik,
+      str, poli, createdAt, updatedAt);
 
   @JsonKey(ignore: true)
   @override
@@ -277,40 +297,44 @@ class _$RekmedImpl implements _Rekmed {
 
 abstract class _Rekmed implements Rekmed {
   const factory _Rekmed(
-      {@HiveField(1) required final String id,
-      @HiveField(2) required final String name,
-      @HiveField(3) required final int phone,
-      @HiveField(4) required final int nik,
-      @HiveField(5) required final int str,
-      @HiveField(6) required final Poli poli,
-      @HiveField(7) required final DateTime createdAt,
-      @HiveField(8) required final DateTime updatedAt}) = _$RekmedImpl;
+      {@HiveField(1) final String? id,
+      @HiveField(2) required final String clinicID,
+      @HiveField(3) required final String name,
+      @HiveField(4) required final int phone,
+      @HiveField(5) required final int nik,
+      @HiveField(6) required final int str,
+      @HiveField(7) required final Poli poli,
+      @HiveField(8) required final DateTime createdAt,
+      @HiveField(9) required final DateTime updatedAt}) = _$RekmedImpl;
 
   factory _Rekmed.fromJson(Map<String, dynamic> json) = _$RekmedImpl.fromJson;
 
   @override
   @HiveField(1)
-  String get id;
+  String? get id;
   @override
   @HiveField(2)
-  String get name;
+  String get clinicID;
   @override
   @HiveField(3)
-  int get phone;
+  String get name;
   @override
   @HiveField(4)
-  int get nik;
+  int get phone;
   @override
   @HiveField(5)
-  int get str;
+  int get nik;
   @override
   @HiveField(6)
-  Poli get poli;
+  int get str;
   @override
   @HiveField(7)
-  DateTime get createdAt;
+  Poli get poli;
   @override
   @HiveField(8)
+  DateTime get createdAt;
+  @override
+  @HiveField(9)
   DateTime get updatedAt;
   @override
   @JsonKey(ignore: true)

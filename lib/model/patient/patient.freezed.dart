@@ -20,11 +20,11 @@ Patient _$PatientFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Patient {
-  String get id => throw _privateConstructorUsedError;
+  String? get id => throw _privateConstructorUsedError;
+  String get clinicID => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   DateTime get date => throw _privateConstructorUsedError;
   String get address => throw _privateConstructorUsedError;
-  Poli get poli => throw _privateConstructorUsedError;
   List<String> get rekmed => throw _privateConstructorUsedError;
   DateTime get createdAt => throw _privateConstructorUsedError;
   DateTime get updatedAt => throw _privateConstructorUsedError;
@@ -40,11 +40,11 @@ abstract class $PatientCopyWith<$Res> {
       _$PatientCopyWithImpl<$Res, Patient>;
   @useResult
   $Res call(
-      {String id,
+      {String? id,
+      String clinicID,
       String name,
       DateTime date,
       String address,
-      Poli poli,
       List<String> rekmed,
       DateTime createdAt,
       DateTime updatedAt});
@@ -63,19 +63,23 @@ class _$PatientCopyWithImpl<$Res, $Val extends Patient>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
+    Object? id = freezed,
+    Object? clinicID = null,
     Object? name = null,
     Object? date = null,
     Object? address = null,
-    Object? poli = null,
     Object? rekmed = null,
     Object? createdAt = null,
     Object? updatedAt = null,
   }) {
     return _then(_value.copyWith(
-      id: null == id
+      id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
+              as String?,
+      clinicID: null == clinicID
+          ? _value.clinicID
+          : clinicID // ignore: cast_nullable_to_non_nullable
               as String,
       name: null == name
           ? _value.name
@@ -89,10 +93,6 @@ class _$PatientCopyWithImpl<$Res, $Val extends Patient>
           ? _value.address
           : address // ignore: cast_nullable_to_non_nullable
               as String,
-      poli: null == poli
-          ? _value.poli
-          : poli // ignore: cast_nullable_to_non_nullable
-              as Poli,
       rekmed: null == rekmed
           ? _value.rekmed
           : rekmed // ignore: cast_nullable_to_non_nullable
@@ -117,11 +117,11 @@ abstract class _$$PatientImplCopyWith<$Res> implements $PatientCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {String id,
+      {String? id,
+      String clinicID,
       String name,
       DateTime date,
       String address,
-      Poli poli,
       List<String> rekmed,
       DateTime createdAt,
       DateTime updatedAt});
@@ -138,19 +138,23 @@ class __$$PatientImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
+    Object? id = freezed,
+    Object? clinicID = null,
     Object? name = null,
     Object? date = null,
     Object? address = null,
-    Object? poli = null,
     Object? rekmed = null,
     Object? createdAt = null,
     Object? updatedAt = null,
   }) {
     return _then(_$PatientImpl(
-      id: null == id
+      id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
+              as String?,
+      clinicID: null == clinicID
+          ? _value.clinicID
+          : clinicID // ignore: cast_nullable_to_non_nullable
               as String,
       name: null == name
           ? _value.name
@@ -164,10 +168,6 @@ class __$$PatientImplCopyWithImpl<$Res>
           ? _value.address
           : address // ignore: cast_nullable_to_non_nullable
               as String,
-      poli: null == poli
-          ? _value.poli
-          : poli // ignore: cast_nullable_to_non_nullable
-              as Poli,
       rekmed: null == rekmed
           ? _value._rekmed
           : rekmed // ignore: cast_nullable_to_non_nullable
@@ -188,11 +188,11 @@ class __$$PatientImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$PatientImpl implements _Patient {
   const _$PatientImpl(
-      {required this.id,
+      {this.id,
+      required this.clinicID,
       required this.name,
       required this.date,
       required this.address,
-      required this.poli,
       required final List<String> rekmed,
       required this.createdAt,
       required this.updatedAt})
@@ -202,15 +202,15 @@ class _$PatientImpl implements _Patient {
       _$$PatientImplFromJson(json);
 
   @override
-  final String id;
+  final String? id;
+  @override
+  final String clinicID;
   @override
   final String name;
   @override
   final DateTime date;
   @override
   final String address;
-  @override
-  final Poli poli;
   final List<String> _rekmed;
   @override
   List<String> get rekmed {
@@ -226,7 +226,7 @@ class _$PatientImpl implements _Patient {
 
   @override
   String toString() {
-    return 'Patient(id: $id, name: $name, date: $date, address: $address, poli: $poli, rekmed: $rekmed, createdAt: $createdAt, updatedAt: $updatedAt)';
+    return 'Patient(id: $id, clinicID: $clinicID, name: $name, date: $date, address: $address, rekmed: $rekmed, createdAt: $createdAt, updatedAt: $updatedAt)';
   }
 
   @override
@@ -235,10 +235,11 @@ class _$PatientImpl implements _Patient {
         (other.runtimeType == runtimeType &&
             other is _$PatientImpl &&
             (identical(other.id, id) || other.id == id) &&
+            (identical(other.clinicID, clinicID) ||
+                other.clinicID == clinicID) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.date, date) || other.date == date) &&
             (identical(other.address, address) || other.address == address) &&
-            (identical(other.poli, poli) || other.poli == poli) &&
             const DeepCollectionEquality().equals(other._rekmed, _rekmed) &&
             (identical(other.createdAt, createdAt) ||
                 other.createdAt == createdAt) &&
@@ -248,8 +249,16 @@ class _$PatientImpl implements _Patient {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, name, date, address, poli,
-      const DeepCollectionEquality().hash(_rekmed), createdAt, updatedAt);
+  int get hashCode => Object.hash(
+      runtimeType,
+      id,
+      clinicID,
+      name,
+      date,
+      address,
+      const DeepCollectionEquality().hash(_rekmed),
+      createdAt,
+      updatedAt);
 
   @JsonKey(ignore: true)
   @override
@@ -267,11 +276,11 @@ class _$PatientImpl implements _Patient {
 
 abstract class _Patient implements Patient {
   const factory _Patient(
-      {required final String id,
+      {final String? id,
+      required final String clinicID,
       required final String name,
       required final DateTime date,
       required final String address,
-      required final Poli poli,
       required final List<String> rekmed,
       required final DateTime createdAt,
       required final DateTime updatedAt}) = _$PatientImpl;
@@ -279,15 +288,15 @@ abstract class _Patient implements Patient {
   factory _Patient.fromJson(Map<String, dynamic> json) = _$PatientImpl.fromJson;
 
   @override
-  String get id;
+  String? get id;
+  @override
+  String get clinicID;
   @override
   String get name;
   @override
   DateTime get date;
   @override
   String get address;
-  @override
-  Poli get poli;
   @override
   List<String> get rekmed;
   @override

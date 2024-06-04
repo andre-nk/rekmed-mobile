@@ -7,7 +7,8 @@ part of 'rekmed.dart';
 // **************************************************************************
 
 _$RekmedImpl _$$RekmedImplFromJson(Map<String, dynamic> json) => _$RekmedImpl(
-      id: json['id'] as String,
+      id: json['id'] as String?,
+      clinicID: json['clinicID'] as String,
       name: json['name'] as String,
       phone: (json['phone'] as num).toInt(),
       nik: (json['nik'] as num).toInt(),
@@ -20,6 +21,7 @@ _$RekmedImpl _$$RekmedImplFromJson(Map<String, dynamic> json) => _$RekmedImpl(
 Map<String, dynamic> _$$RekmedImplToJson(_$RekmedImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
+      'clinicID': instance.clinicID,
       'name': instance.name,
       'phone': instance.phone,
       'nik': instance.nik,

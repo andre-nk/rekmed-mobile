@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 
 class AppBarCustom extends StatelessWidget implements PreferredSizeWidget {
   final String title;
+  final List<Widget> actions;
 
-  const AppBarCustom({super.key, required this.title});
+  const AppBarCustom({super.key, required this.title, this.actions = const []});
 
   @override
   Widget build(BuildContext context) {
@@ -11,7 +12,9 @@ class AppBarCustom extends StatelessWidget implements PreferredSizeWidget {
       backgroundColor: Colors.transparent,
       elevation: 0,
       leading: IconButton(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.pop(context);
+        },
         icon: const Icon(
           Icons.arrow_back,
           color: Colors.black,
@@ -25,6 +28,7 @@ class AppBarCustom extends StatelessWidget implements PreferredSizeWidget {
           fontWeight: FontWeight.bold,
         ),
       ),
+      actions: actions,
     );
   }
 

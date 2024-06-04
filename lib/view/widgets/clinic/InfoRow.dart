@@ -23,55 +23,57 @@ class InfoRow extends StatelessWidget {
           const Spacer(),
           GestureDetector(
             onTap: () {
-              showDialog(
-                context: context,
-                builder: (BuildContext context) {
-                  TextEditingController controller = TextEditingController(text: value);
-                  return Theme(
-                    data: Theme.of(context).copyWith(
-                      textSelectionTheme: const TextSelectionThemeData(
-                        cursorColor: Colors.teal,
-                        selectionHandleColor: Colors.teal,
-                      ),
-                    ),
-                    child: AlertDialog(
-                      title: Text('Edit $title'),
-                      content: TextField(
-                        controller: controller,
-                        decoration: InputDecoration(
-                          hintText: title,
-                          focusedBorder: const UnderlineInputBorder(
-                            borderSide: BorderSide(color: Colors.teal),
-                          ),
+              if (onSave != null) {
+                showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    TextEditingController controller = TextEditingController(text: value);
+                    return Theme(
+                      data: Theme.of(context).copyWith(
+                        textSelectionTheme: const TextSelectionThemeData(
+                          cursorColor: Colors.teal,
+                          selectionHandleColor: Colors.teal,
                         ),
                       ),
-                      actions: [
-                        TextButton(
-                          child: const Text(
-                            "Cancel",
-                            style: TextStyle(color: Colors.teal),
+                      child: AlertDialog(
+                        title: Text('Edit $title'),
+                        content: TextField(
+                          controller: controller,
+                          decoration: InputDecoration(
+                            hintText: title,
+                            focusedBorder: const UnderlineInputBorder(
+                              borderSide: BorderSide(color: Colors.teal),
+                            ),
                           ),
-                          onPressed: () {
-                            Navigator.of(context).pop();
-                          },
                         ),
-                        TextButton(
-                          child: const Text(
-                            "Save",
-                            style: TextStyle(color: Colors.teal),
+                        actions: [
+                          TextButton(
+                            child: const Text(
+                              "Cancel",
+                              style: TextStyle(color: Colors.teal),
+                            ),
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
                           ),
-                          onPressed: () {
-                            if (onSave != null) {
-                              onSave!(controller.text);
-                            }
-                            Navigator.of(context).pop();
-                          },
-                        ),
-                      ],
-                    ),
-                  );
-                },
-              );
+                          TextButton(
+                            child: const Text(
+                              "Save",
+                              style: TextStyle(color: Colors.teal),
+                            ),
+                            onPressed: () {
+                              if (onSave != null) {
+                                onSave!(controller.text);
+                              }
+                              Navigator.of(context).pop();
+                            },
+                          ),
+                        ],
+                      ),
+                    );
+                  },
+                );
+              }
             },
             child: Row(
               children: [
@@ -83,11 +85,12 @@ class InfoRow extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(width: 8),
-                const Icon(
-                  Icons.arrow_forward_ios,
-                  size: 16,
-                  color: Colors.black54,
-                ),
+                if (onSave != null)
+                    const Icon(
+                      Icons.arrow_forward_ios,
+                      color: Colors.teal,
+                      size: 16,
+                    ),
               ],
             ),
           ),

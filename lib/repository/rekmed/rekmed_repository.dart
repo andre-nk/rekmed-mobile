@@ -12,18 +12,18 @@ class RekmedRepository {
     try {
       QuerySnapshot<Map<String, dynamic>> rekmeds;
 
-      if(date != null){
+      if (date != null) {
         rekmeds = await _firebaseFirestore
-          .collection('rekmeds')
-          .where('userID', isEqualTo: userID)
-          .where('createdAt', isGreaterThanOrEqualTo: date)
-          .where('createdAt', isLessThanOrEqualTo: date.add(const Duration(days: 1)))
-          .get();
+            .collection('rekmeds')
+            .where('userID', isEqualTo: userID)
+            .where('createdAt', isGreaterThanOrEqualTo: date)
+            .where('createdAt', isLessThanOrEqualTo: date.add(const Duration(days: 1)))
+            .get();
       } else {
         rekmeds = await _firebaseFirestore
-          .collection('rekmeds')
-          .where('userID', isEqualTo: userID)
-          .get();
+            .collection('rekmeds')
+            .where('userID', isEqualTo: userID)
+            .get();
       }
 
       return rekmeds.docs.map((e) => Rekmed.fromJson(e.data())).toList();
@@ -43,7 +43,9 @@ class RekmedRepository {
 
   Future<void> addRekmed(Rekmed rekmed) async {
     try {
-      await _firebaseFirestore.collection('rekmeds').add(rekmed.toJson());
+      await _firebaseFirestore.collection('rekmeds').doc(rekmed.id).set(
+            rekmed.toJson(),
+          );
     } catch (e) {
       throw Exception(e);
     }
@@ -51,7 +53,7 @@ class RekmedRepository {
 
   Future<void> updateRekmed(Rekmed rekmed) async {
     try {
-      Rekmed oldRekmed = await getRekmedById(rekmed.id);
+      Rekmed oldRekmed = await getRekmedById(rekmed.id!);
       if (oldRekmed.updatedAt.isBefore(rekmed.updatedAt)) {
         await _firebaseFirestore.collection('rekmeds').doc(rekmed.id).update(
               rekmed.toJson(),

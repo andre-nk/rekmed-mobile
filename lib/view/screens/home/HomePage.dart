@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rekmed/app/auth/cubit/auth_cubit.dart';
 import 'package:rekmed/view/widgets/home/HomeSearchBar.dart';
+import 'package:rekmed/view/widgets/patient/RekMedBox.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -63,12 +64,12 @@ class HomePage extends StatelessWidget {
                       ),
                     ),
                   ),
-                  const Padding(
-                    padding: EdgeInsets.only(top: 24.0),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 24.0),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
+                        const Text(
                           "Data rekam medis terakhir",
                           style: TextStyle(
                             fontSize: 16.0,
@@ -76,7 +77,12 @@ class HomePage extends StatelessWidget {
                             color: Colors.black,
                           ),
                         ),
-    
+                        RekmedBox(
+                          idRekamMedis: "RM0001",
+                          namaPasien: "Budi",
+                          dokter: "Dr. Andi",
+                          tanggal: DateTime.now(),
+                        ),
                       ],
                     ),
                   ),

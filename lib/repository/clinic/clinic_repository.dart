@@ -22,8 +22,8 @@ class ClinicRepository {
         clinic = Clinic(
           uid: user.uid,
           email: user.email!,
-          name: user.displayName!,
-          username: user.displayName!,
+          name: rawClinic['name'],
+          username: rawClinic['username'],
           address: rawClinic['address'],
           phone: rawClinic['phone'],
           bpjs: rawClinic['bpjs'],
@@ -51,9 +51,19 @@ class ClinicRepository {
 
   Future<void> updateClinic(Clinic clinic) async {
     try {
-      await _firebaseFirestore.collection('clinics').doc(clinic.uid).update(
-            clinic.toJson(),
-          );
+      final docSnapshot = await _firebaseFirestore
+          .collection('clinics')
+          .where('uid', isEqualTo: clinic.uid)
+          .get();
+
+      if (docSnapshot.docs.isNotEmpty) {
+        await _firebaseFirestore
+            .collection('clinics')
+            .doc(docSnapshot.docs.first.id)
+            .update(clinic.toJson());
+      } else {
+        throw Exception('Clinic not found');
+      }
     } catch (e) {
       throw Exception(e);
     }

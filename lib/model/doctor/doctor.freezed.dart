@@ -20,8 +20,11 @@ Doctor _$DoctorFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Doctor {
-  String get id => throw _privateConstructorUsedError;
+  String? get id => throw _privateConstructorUsedError;
+  String get profilePicture => throw _privateConstructorUsedError;
+  String get clinicID => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
+  String get email => throw _privateConstructorUsedError;
   int get phone => throw _privateConstructorUsedError;
   int get nik => throw _privateConstructorUsedError;
   int get str => throw _privateConstructorUsedError;
@@ -40,8 +43,11 @@ abstract class $DoctorCopyWith<$Res> {
       _$DoctorCopyWithImpl<$Res, Doctor>;
   @useResult
   $Res call(
-      {String id,
+      {String? id,
+      String profilePicture,
+      String clinicID,
       String name,
+      String email,
       int phone,
       int nik,
       int str,
@@ -63,8 +69,11 @@ class _$DoctorCopyWithImpl<$Res, $Val extends Doctor>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
+    Object? id = freezed,
+    Object? profilePicture = null,
+    Object? clinicID = null,
     Object? name = null,
+    Object? email = null,
     Object? phone = null,
     Object? nik = null,
     Object? str = null,
@@ -73,13 +82,25 @@ class _$DoctorCopyWithImpl<$Res, $Val extends Doctor>
     Object? updatedAt = null,
   }) {
     return _then(_value.copyWith(
-      id: null == id
+      id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
+              as String?,
+      profilePicture: null == profilePicture
+          ? _value.profilePicture
+          : profilePicture // ignore: cast_nullable_to_non_nullable
+              as String,
+      clinicID: null == clinicID
+          ? _value.clinicID
+          : clinicID // ignore: cast_nullable_to_non_nullable
               as String,
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      email: null == email
+          ? _value.email
+          : email // ignore: cast_nullable_to_non_nullable
               as String,
       phone: null == phone
           ? _value.phone
@@ -117,8 +138,11 @@ abstract class _$$DoctorImplCopyWith<$Res> implements $DoctorCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {String id,
+      {String? id,
+      String profilePicture,
+      String clinicID,
       String name,
+      String email,
       int phone,
       int nik,
       int str,
@@ -138,8 +162,11 @@ class __$$DoctorImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
+    Object? id = freezed,
+    Object? profilePicture = null,
+    Object? clinicID = null,
     Object? name = null,
+    Object? email = null,
     Object? phone = null,
     Object? nik = null,
     Object? str = null,
@@ -148,13 +175,25 @@ class __$$DoctorImplCopyWithImpl<$Res>
     Object? updatedAt = null,
   }) {
     return _then(_$DoctorImpl(
-      id: null == id
+      id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
+              as String?,
+      profilePicture: null == profilePicture
+          ? _value.profilePicture
+          : profilePicture // ignore: cast_nullable_to_non_nullable
+              as String,
+      clinicID: null == clinicID
+          ? _value.clinicID
+          : clinicID // ignore: cast_nullable_to_non_nullable
               as String,
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      email: null == email
+          ? _value.email
+          : email // ignore: cast_nullable_to_non_nullable
               as String,
       phone: null == phone
           ? _value.phone
@@ -188,8 +227,11 @@ class __$$DoctorImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$DoctorImpl implements _Doctor {
   const _$DoctorImpl(
-      {required this.id,
+      {this.id,
+      required this.profilePicture,
+      required this.clinicID,
       required this.name,
+      required this.email,
       required this.phone,
       required this.nik,
       required this.str,
@@ -201,9 +243,15 @@ class _$DoctorImpl implements _Doctor {
       _$$DoctorImplFromJson(json);
 
   @override
-  final String id;
+  final String? id;
+  @override
+  final String profilePicture;
+  @override
+  final String clinicID;
   @override
   final String name;
+  @override
+  final String email;
   @override
   final int phone;
   @override
@@ -219,7 +267,7 @@ class _$DoctorImpl implements _Doctor {
 
   @override
   String toString() {
-    return 'Doctor(id: $id, name: $name, phone: $phone, nik: $nik, str: $str, poli: $poli, createdAt: $createdAt, updatedAt: $updatedAt)';
+    return 'Doctor(id: $id, profilePicture: $profilePicture, clinicID: $clinicID, name: $name, email: $email, phone: $phone, nik: $nik, str: $str, poli: $poli, createdAt: $createdAt, updatedAt: $updatedAt)';
   }
 
   @override
@@ -228,7 +276,12 @@ class _$DoctorImpl implements _Doctor {
         (other.runtimeType == runtimeType &&
             other is _$DoctorImpl &&
             (identical(other.id, id) || other.id == id) &&
+            (identical(other.profilePicture, profilePicture) ||
+                other.profilePicture == profilePicture) &&
+            (identical(other.clinicID, clinicID) ||
+                other.clinicID == clinicID) &&
             (identical(other.name, name) || other.name == name) &&
+            (identical(other.email, email) || other.email == email) &&
             (identical(other.phone, phone) || other.phone == phone) &&
             (identical(other.nik, nik) || other.nik == nik) &&
             (identical(other.str, str) || other.str == str) &&
@@ -241,8 +294,8 @@ class _$DoctorImpl implements _Doctor {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType, id, name, phone, nik, str, poli, createdAt, updatedAt);
+  int get hashCode => Object.hash(runtimeType, id, profilePicture, clinicID,
+      name, email, phone, nik, str, poli, createdAt, updatedAt);
 
   @JsonKey(ignore: true)
   @override
@@ -260,8 +313,11 @@ class _$DoctorImpl implements _Doctor {
 
 abstract class _Doctor implements Doctor {
   const factory _Doctor(
-      {required final String id,
+      {final String? id,
+      required final String profilePicture,
+      required final String clinicID,
       required final String name,
+      required final String email,
       required final int phone,
       required final int nik,
       required final int str,
@@ -272,9 +328,15 @@ abstract class _Doctor implements Doctor {
   factory _Doctor.fromJson(Map<String, dynamic> json) = _$DoctorImpl.fromJson;
 
   @override
-  String get id;
+  String? get id;
+  @override
+  String get profilePicture;
+  @override
+  String get clinicID;
   @override
   String get name;
+  @override
+  String get email;
   @override
   int get phone;
   @override

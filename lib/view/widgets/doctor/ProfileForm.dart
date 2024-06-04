@@ -7,13 +7,14 @@ class ProfileForm extends StatelessWidget {
   final TextInputType keyboardType;
   final bool isEditMode;
 
-  const ProfileForm(
-      {super.key,
-      required this.title,
-      required this.hintText,
-      required this.controller,
-      required this.keyboardType,
-      required this.isEditMode});
+  const ProfileForm({
+    super.key,
+    required this.title,
+    required this.hintText,
+    required this.controller,
+    required this.keyboardType,
+    required this.isEditMode,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -27,20 +28,36 @@ class ProfileForm extends StatelessWidget {
             fontWeight: FontWeight.w600,
           ),
         ),
-        Container(
-          margin: const EdgeInsets.only(top: 4),
-          padding: const EdgeInsets.symmetric(horizontal: 12),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(8),
-            color: const Color(0xFFD9D9D9).withOpacity(0.3),
-          ),
-          child: TextFormField(
-            enabled: isEditMode,
-            controller: controller,
-            keyboardType: keyboardType,
-            decoration: InputDecoration(
-              border: InputBorder.none,
-              hintText: hintText,
+        GestureDetector(
+          onTap: () {
+            if (keyboardType == TextInputType.datetime) {
+              showDatePicker(
+                context: context,
+                initialDate: DateTime.now(),
+                firstDate: DateTime(1900),
+                lastDate: DateTime.now(),
+              ).then((value) {
+                if (value != null) {
+                  controller.text = value.toString();
+                }
+              });
+            }
+          },
+          child: Container(
+            margin: const EdgeInsets.only(top: 4),
+            padding: const EdgeInsets.symmetric(horizontal: 12),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(8),
+              color: const Color(0xFFD9D9D9).withOpacity(0.3),
+            ),
+            child: TextFormField(
+              enabled: isEditMode,
+              controller: controller,
+              keyboardType: keyboardType,
+              decoration: InputDecoration(
+                border: InputBorder.none,
+                hintText: hintText,
+              ),
             ),
           ),
         ),
