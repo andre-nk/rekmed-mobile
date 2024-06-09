@@ -15,6 +15,7 @@ class PatientListTile extends StatelessWidget {
         }));
       },
       child: Container(
+        margin: const EdgeInsets.only(bottom: 16.0),
         padding: const EdgeInsets.all(16.0),
         decoration: BoxDecoration(
           border: Border(

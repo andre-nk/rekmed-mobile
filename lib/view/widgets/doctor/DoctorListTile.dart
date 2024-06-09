@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:rekmed/model/doctor/doctor.dart';
 import 'package:rekmed/view/screens/doctor/DoctorProfilePage.dart';
@@ -15,6 +16,7 @@ class DoctorListTile extends StatelessWidget {
         }));
       },
       child: Container(
+        margin: const EdgeInsets.only(bottom: 16.0),
         padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 8.0),
         decoration: BoxDecoration(
           border: Border(
@@ -26,9 +28,20 @@ class DoctorListTile extends StatelessWidget {
         ),
         child: Row(
           children: [
-            CircleAvatar(
-              radius: 32.0,
-              backgroundImage: NetworkImage(doctor.profilePicture),
+            CachedNetworkImage(
+              color: Colors.grey,
+              imageUrl: doctor.profilePicture,
+              imageBuilder: (context, imageProvider) => CircleAvatar(
+                radius: 32.0,
+                backgroundImage: imageProvider,
+              ),
+              errorWidget: (context, url, error) => const Opacity(
+                opacity: 0.3,
+                child: CircleAvatar(
+                  radius: 32.0,
+                  backgroundColor: Colors.grey,
+                ),
+              ),
             ),
             const SizedBox(width: 24.0), // Add this line (1/2)
             Column(

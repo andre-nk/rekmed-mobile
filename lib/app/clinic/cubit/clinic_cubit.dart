@@ -19,6 +19,11 @@ class ClinicCubit extends Cubit<ClinicState> {
 
   Future<void> updateClinic(Clinic clinic) async {
     emit(const ClinicState.loading());
+
+    Future.delayed(const Duration(seconds: 5), () {
+      emit(ClinicState.loaded(clinic));
+    });
+
     await clinicRepository.updateClinic(clinic);
     emit(ClinicState.loaded(clinic));
   }

@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -59,35 +60,59 @@ class _DoctorProfilePictureState extends State<DoctorProfilePicture> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Container(
-                width: double.infinity,
-                height: 175,
-                margin: const EdgeInsets.only(bottom: 8),
-                decoration: BoxDecoration(
-                  border: Border.all(
-                    color: Colors.black,
-                    width: 1,
-                  ),
-                  borderRadius: BorderRadius.circular(8),
-                  image: _imageFile.path.isNotEmpty
-                      ? DecorationImage(
-                          image: FileImage(_imageFile),
-                          fit: BoxFit.cover,
-                        )
-                      : widget.profilePicture != null
+              CachedNetworkImage(
+                imageUrl: widget.profilePicture ?? '',
+                imageBuilder: (context, imageProvider) {
+                  return Container(
+                    width: double.infinity,
+                    height: 175,
+                    margin: const EdgeInsets.only(bottom: 8),
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                        color: Colors.black,
+                        width: 1,
+                      ),
+                      borderRadius: BorderRadius.circular(8),
+                      image: _imageFile.path.isNotEmpty
                           ? DecorationImage(
-                              image: NetworkImage(widget.profilePicture!),
+                              image: FileImage(_imageFile),
                               fit: BoxFit.cover,
                             )
-                          : null,
-                ),
-                child: _imageFile.path.isEmpty && widget.profilePicture == null
-                    ? const Icon(
-                        Icons.person,
-                        size: 100,
+                          : widget.profilePicture != null
+                              ? DecorationImage(
+                                  image: imageProvider,
+                                  fit: BoxFit.cover,
+                                )
+                              : null,
+                    ),
+                    child: _imageFile.path.isEmpty && widget.profilePicture == null
+                        ? const Icon(
+                            Icons.person,
+                            size: 100,
+                            color: Colors.black,
+                          )
+                        : null,
+                  );
+                },
+                errorWidget: (context, url, error) {
+                  return Container(
+                    width: double.infinity,
+                    height: 175,
+                    margin: const EdgeInsets.only(bottom: 8),
+                    decoration: BoxDecoration(
+                      border: Border.all(
                         color: Colors.black,
-                      )
-                    : null,
+                        width: 1,
+                      ),
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    child: const Icon(
+                      Icons.person,
+                      size: 100,
+                      color: Colors.black,
+                    ),
+                  );
+                },
               ),
               widget.isEditing
                   ? ElevatedButton(

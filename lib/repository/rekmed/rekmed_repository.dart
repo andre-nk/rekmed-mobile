@@ -8,34 +8,35 @@ class RekmedRepository {
 
   RekmedRepository() : _firebaseFirestore = FirebaseFirestore.instance;
 
-  Future<List<Rekmed>> getRekmedByUserID(String userID, DateTime? date) async {
+  Future<int> getRekmedCountByClinicID(String clinicID, DateTime date) async {
     try {
       QuerySnapshot<Map<String, dynamic>> rekmeds;
+      rekmeds = await _firebaseFirestore
+          .collection('rekmeds')
+          .where('clinicID', isEqualTo: clinicID)
+          .get();
 
-      if (date != null) {
-        rekmeds = await _firebaseFirestore
-            .collection('rekmeds')
-            .where('userID', isEqualTo: userID)
-            .where('createdAt', isGreaterThanOrEqualTo: date)
-            .where('createdAt', isLessThanOrEqualTo: date.add(const Duration(days: 1)))
-            .get();
-      } else {
-        rekmeds = await _firebaseFirestore
-            .collection('rekmeds')
-            .where('userID', isEqualTo: userID)
-            .get();
-      }
-
-      return rekmeds.docs.map((e) => Rekmed.fromJson(e.data())).toList();
+      return rekmeds.docs.length;
     } catch (e) {
       throw Exception(e);
     }
   }
 
-  Future<Rekmed> getRekmedById(String id) async {
+  Future<Rekmed> getRekmedById(String id, bool isOffline) async {
     try {
-      final rekmed = await _firebaseFirestore.collection('rekmeds').doc(id).get();
-      return Rekmed.fromJson(rekmed.data()!);
+      var box = await Hive.openBox('rekmed_offline');
+      dynamic boxObject = box.get(id);
+
+      if (isOffline && boxObject != null) {
+        Rekmed rekmed = boxObject as Rekmed;
+        await box.close();
+        return rekmed;
+      } else {
+        DocumentSnapshot<Map<String, dynamic>> rekmed;
+        rekmed = await _firebaseFirestore.collection('rekmeds').doc(id).get();
+
+        return Rekmed.fromJson(rekmed.data()!);
+      }
     } catch (e) {
       throw Exception(e);
     }
@@ -51,20 +52,35 @@ class RekmedRepository {
     }
   }
 
-  Future<void> updateRekmed(Rekmed rekmed) async {
+  Future<void> updateRekmed(Rekmed rekmed, bool isOffline) async {
     try {
-      Rekmed oldRekmed = await getRekmedById(rekmed.id!);
-      if (oldRekmed.updatedAt.isBefore(rekmed.updatedAt)) {
-        await _firebaseFirestore.collection('rekmeds').doc(rekmed.id).update(
-              rekmed.toJson(),
-            );
+      if (isOffline) {
+        await updateRekmedOffline(rekmed);
       } else {
-        await _firebaseFirestore
-            .collection('rekmeds')
-            .doc(rekmed.id)
-            .collection('versions')
-            .add(rekmed.toJson());
+        Rekmed oldRekmed = await getRekmedById(rekmed.id!, false);
+        if (oldRekmed.updatedAt.isBefore(rekmed.updatedAt) ||
+            oldRekmed.updatedAt == rekmed.updatedAt) {
+          await _firebaseFirestore.collection('rekmeds').doc(rekmed.id).update(
+                rekmed.toJson(),
+              );
+        } else {
+          await _firebaseFirestore
+              .collection('rekmeds')
+              .doc(rekmed.id)
+              .collection('versions')
+              .add(rekmed.toJson());
+        }
       }
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<void> overrideUpdateRekmed(Rekmed rekmed, String overrideID) async {
+    try {
+      await _firebaseFirestore.collection('rekmeds').doc(overrideID).update(
+            rekmed.toJson(),
+          );
     } catch (e) {
       throw Exception(e);
     }
@@ -80,10 +96,10 @@ class RekmedRepository {
 
   Future<void> updateRekmedOffline(Rekmed rekmed) async {
     try {
-      var box = await Hive.openLazyBox('rekmed_offline');
-
+      var box = await Hive.openBox('rekmed_offline');
       await box.put(rekmed.id, rekmed);
       await box.close();
+
     } catch (e) {
       throw Exception(e);
     }

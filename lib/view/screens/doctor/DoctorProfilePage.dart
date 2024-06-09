@@ -52,35 +52,38 @@ class _DoctorProfilePageState extends State<DoctorProfilePage> {
   }
 
   void addOrUpdateDoctor(
-      BuildContext doctorContext, String clinicID, String? profilePictureURL) {
+    BuildContext doctorContext,
+    String clinicID,
+    String? profilePictureURL,
+  ) {
     if (widget.doctor != null) {
-      if(profilePictureURL != null) {
+      if (profilePictureURL != null) {
         doctorContext.read<DoctorCubit>().updateDoctor(
-          widget.doctor!.copyWith(
-            profilePicture: profilePictureURL,
-            clinicID: clinicID,
-            name: nameController.text,
-            email: emailController.text,
-            phone: int.parse(phoneController.text),
-            nik: int.parse(nikController.text),
-            str: int.parse(strController.text),
-            poli: poli,
-            updatedAt: DateTime.now(),
-          ),
-        );
+              widget.doctor!.copyWith(
+                profilePicture: profilePictureURL,
+                clinicID: clinicID,
+                name: nameController.text,
+                email: emailController.text,
+                phone: int.parse(phoneController.text),
+                nik: int.parse(nikController.text),
+                str: int.parse(strController.text),
+                poli: poli,
+                updatedAt: DateTime.now(),
+              ),
+            );
       } else {
         doctorContext.read<DoctorCubit>().updateDoctor(
-          widget.doctor!.copyWith(
-            clinicID: clinicID,
-            name: nameController.text,
-            email: emailController.text,
-            phone: int.parse(phoneController.text),
-            nik: int.parse(nikController.text),
-            str: int.parse(strController.text),
-            poli: poli,
-            updatedAt: DateTime.now(),
-          ),
-        );
+              widget.doctor!.copyWith(
+                clinicID: clinicID,
+                name: nameController.text,
+                email: emailController.text,
+                phone: int.parse(phoneController.text),
+                nik: int.parse(nikController.text),
+                str: int.parse(strController.text),
+                poli: poli,
+                updatedAt: DateTime.now(),
+              ),
+            );
       }
     } else {
       doctorContext.read<DoctorCubit>().addDoctor(

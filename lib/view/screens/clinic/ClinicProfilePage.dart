@@ -121,7 +121,7 @@ class ClinicProfilePage extends StatelessWidget {
                       ),
                       InfoRow(
                         title: 'No. BPJS',
-                        value: clinic.bpjs.isEmpty ? "Belum diisi" : clinic.bpjs,
+                        value: clinic.bpjs.isEmpty ? "" : clinic.bpjs,
                         onSave: (newValue) async {
                           await context
                               .read<ClinicCubit>()
@@ -133,7 +133,7 @@ class ClinicProfilePage extends StatelessWidget {
                       InfoRow(
                         title: 'No. SatuSehat',
                         value:
-                            clinic.satuSehat.isEmpty ? "Belum diisi" : clinic.satuSehat,
+                            clinic.satuSehat.isEmpty ? "" : clinic.satuSehat,
                         onSave: (newValue) async {
                           await context
                               .read<ClinicCubit>()

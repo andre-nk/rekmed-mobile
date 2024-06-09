@@ -5,6 +5,7 @@ import 'package:rekmed/app/auth/cubit/auth_cubit.dart';
 import 'package:rekmed/app/patient/cubit/patient_cubit.dart';
 import 'package:rekmed/model/patient/patient.dart';
 import 'package:rekmed/repository/patient/patient_repository.dart';
+import 'package:rekmed/view/screens/patient/PatientProfilePage.dart';
 import 'package:rekmed/view/widgets/home/HomeSearchBar.dart';
 import 'package:rekmed/view/widgets/patient/PatientListTile.dart';
 
@@ -39,17 +40,22 @@ class PatientListPage extends StatelessWidget {
                 floatingActionButton: FloatingActionButton(
                   elevation: 0.1,
                   onPressed: () {
-                    Navigator.pushNamed(context, '/add-patient');
+                    Navigator.push(context, MaterialPageRoute(builder: (context) {
+                      return const PatientProfilePage();
+                    }));
                   },
                   child: const Icon(Icons.add),
                 ),
                 body: Column(
                   children: [
-                    const Expanded(
+                    Expanded(
                       flex: 2,
                       child: Padding(
-                        padding: EdgeInsets.all(24.0),
-                        child: HomeSearchBar(),
+                        padding: const EdgeInsets.all(24.0),
+                        child: HomeSearchBar(
+                          clinicID: user.uid,
+                          isPatientSearch: true,
+                        ),
                       ),
                     ),
                     Expanded(
@@ -69,6 +75,9 @@ class PatientListPage extends StatelessWidget {
                                       .copyWith(id: snapshot.id);
 
                                   return PatientListTile(patient: patient);
+                                },
+                                emptyBuilder: (context) {
+                                  return const Center(child: Text('Tidak ada pasien'));
                                 },
                               );
                             },

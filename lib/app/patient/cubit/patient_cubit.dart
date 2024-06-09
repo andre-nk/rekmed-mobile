@@ -1,3 +1,4 @@
+import 'package:async/async.dart';
 import 'package:bloc/bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -13,13 +14,27 @@ class PatientCubit extends Cubit<PatientState> {
 
   Future<void> addPatient(Patient patient) async {
     emit(const PatientState.loading());
+    var cancellableOperation = CancelableOperation.fromFuture(
+      Future.delayed(const Duration(seconds: 5), () {
+        emit(const PatientState.success("Patient added (offline)"));
+      }),
+    );
+
     await patientRepository.addPatient(patient);
+    cancellableOperation.cancel();
     emit(const PatientState.success('Patient added'));
   }
 
   Future<void> updatePatient(Patient patient) async {
     emit(const PatientState.loading());
+    var cancellableOperation = CancelableOperation.fromFuture(
+      Future.delayed(const Duration(seconds: 5), () {
+        emit(const PatientState.success("Patient added (offline)"));
+      }),
+    );
+
     await patientRepository.updatePatient(patient);
+    cancellableOperation.cancel();
     emit(const PatientState.success('Patient updated'));
   }
 
@@ -27,6 +42,24 @@ class PatientCubit extends Cubit<PatientState> {
     emit(const PatientState.loading());
     final patient = await patientRepository.getPatientById(id);
     emit(PatientState.loaded(patient));
+  }
+
+  Future<void> loadSearchQuery(String clinicID, String query) async {
+    try {
+      emit(const PatientState.loading());
+      final searchQuery = FirebaseFirestore.instance
+          .collection('patients')
+          .where('clinicID', isEqualTo: clinicID)
+          .where('name', isGreaterThanOrEqualTo: query)
+          .where('name', isLessThan: '${query}z')
+          .orderBy(
+            'name',
+            descending: false,
+          );
+      emit(PatientState.queryLoaded(searchQuery));
+    } catch (e) {
+      emit(PatientState.error(e.toString()));
+    }
   }
 
   Future<void> loadQuery(String clinicID) async {

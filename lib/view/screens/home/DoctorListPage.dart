@@ -50,11 +50,14 @@ class DoctorListPage extends StatelessWidget {
                   padding: const EdgeInsets.all(24.0).copyWith(top: 0),
                   child: Column(
                     children: [
-                      const Expanded(
+                      Expanded(
                         flex: 2,
                         child: Padding(
-                          padding: EdgeInsets.only(top: 24.0),
-                          child: HomeSearchBar(),
+                          padding: const EdgeInsets.only(top: 24.0),
+                          child: HomeSearchBar(
+                            clinicID: clinic.uid,
+                            isPatientSearch: false,
+                          ),
                         ),
                       ),
                       Expanded(
@@ -72,11 +75,16 @@ class DoctorListPage extends StatelessWidget {
                                     query: query,
                                     itemBuilder: (context, snapshot) {
                                       Doctor doctor = Doctor.fromJson(
-                                              snapshot.data() as Map<String, dynamic>)
-                                          .copyWith(id: snapshot.id);
+                                        snapshot.data() as Map<String, dynamic>,
+                                      ).copyWith(id: snapshot.id);
 
                                       return DoctorListTile(
                                         doctor: doctor,
+                                      );
+                                    },
+                                    emptyBuilder: (context) {
+                                      return const Center(
+                                        child: Text('Tidak ada dokter'),
                                       );
                                     },
                                   );

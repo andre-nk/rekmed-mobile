@@ -1,7 +1,11 @@
+import 'package:firebase_ui_firestore/firebase_ui_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rekmed/app/auth/cubit/auth_cubit.dart';
-import 'package:rekmed/view/widgets/home/HomeSearchBar.dart';
+import 'package:rekmed/app/rekmed/cubit/rekmed_cubit.dart';
+import 'package:rekmed/model/rekmed/rekmed.dart';
+import 'package:rekmed/repository/rekmed/rekmed_repository.dart';
+import 'package:rekmed/view/widgets/home/HomeBox.dart';
 import 'package:rekmed/view/widgets/patient/RekMedBox.dart';
 
 class HomePage extends StatelessWidget {
@@ -15,75 +19,83 @@ class HomePage extends StatelessWidget {
           authenticated: (clinic) {
             return Padding(
               padding: const EdgeInsets.all(24.0),
-              child: ListView(
+              child: Column(
                 children: [
-                  Text(
-                    clinic.name,
-                    style: const TextStyle(
-                      fontSize: 22.0,
-                      fontWeight: FontWeight.bold,
+                  Expanded(
+                    flex: 3,
+                    child: Column(
+                      children: [
+                        Text(
+                          clinic.name,
+                          style: const TextStyle(
+                            fontSize: 22.0,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        Padding(
+                            padding: const EdgeInsets.only(top: 24.0),
+                            child: HomeBox(clinicID: clinic.uid)),
+                      ],
                     ),
                   ),
-                  const Padding(
-                    padding: EdgeInsets.only(top: 24.0),
-                    child: HomeSearchBar(),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 24.0),
-                    child: Container(
-                      padding: const EdgeInsets.all(28.0),
-                      height: MediaQuery.of(context).size.height * 0.15,
-                      decoration: BoxDecoration(
-                        gradient: const LinearGradient(
-                          begin: Alignment.topLeft,
-                          end: Alignment.bottomRight,
-                          colors: <Color>[Color(0xFF04AE91), Color(0xFF05CAD5)],
-                        ),
-                        borderRadius: BorderRadius.circular(16.0),
-                      ),
-                      child: const Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  Expanded(
+                    flex: 7,
+                    child: Padding(
+                      padding: const EdgeInsets.only(top: 24.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
-                            "Jumlah pasien\nHari ini",
-                            style: TextStyle(
-                                fontSize: 18.0,
-                                height: 1.5,
-                                color: Colors.white,
-                                fontWeight: FontWeight.w600),
-                          ),
-                          Text(
-                            "10",
-                            style: TextStyle(
-                              fontSize: 40.0,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
+                          const Expanded(
+                            flex: 1,
+                            child: Text(
+                              "Data rekam medis terakhir",
+                              style: TextStyle(
+                                fontSize: 16.0,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black,
+                              ),
                             ),
-                          )
+                          ),
+                          Expanded(
+                            flex: 9,
+                            child: BlocProvider(
+                              create: (context) => RekmedCubit(
+                                context.read<RekmedRepository>(),
+                              )..getRekmedQueryByClinicIDAndDateRange(
+                                  clinic.uid,
+                                  DateTime.now().subtract(const Duration(days: 1)),
+                                  DateTime.now(),
+                                ),
+                              child: BlocBuilder<RekmedCubit, RekmedState>(
+                                builder: (context, state) {
+                                  return state.maybeWhen(orElse: () {
+                                    return const CircularProgressIndicator();
+                                  }, queryLoaded: (query) {
+                                    return FirestoreListView(
+                                      query: query,
+                                      itemBuilder: (context, snapshot) {
+                                        Rekmed rekmed = Rekmed.fromJson(
+                                          snapshot.data() as Map<String, dynamic>,
+                                        ).copyWith(id: snapshot.id);
+
+                                        return RekmedBox(
+                                          rekmed: rekmed,
+                                          isVersion: false,
+                                        );
+                                      },
+                                      emptyBuilder: (context) {
+                                        return const Center(
+                                          child: Text('Tidak ada rekam medis'),
+                                        );
+                                      },
+                                    );
+                                  });
+                                },
+                              ),
+                            ),
+                          ),
                         ],
                       ),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 24.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const Text(
-                          "Data rekam medis terakhir",
-                          style: TextStyle(
-                            fontSize: 16.0,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.black,
-                          ),
-                        ),
-                        RekmedBox(
-                          idRekamMedis: "RM0001",
-                          namaPasien: "Budi",
-                          dokter: "Dr. Andi",
-                          tanggal: DateTime.now(),
-                        ),
-                      ],
                     ),
                   ),
                 ],
